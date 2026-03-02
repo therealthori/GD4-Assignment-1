@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    public int playerNumber; // 1 or 2
     public float maxHealth = 100f;
     private float currentHealth;
 
@@ -14,8 +15,6 @@ public class Health : MonoBehaviour
     {
         currentHealth -= amount;
 
-        Debug.Log(gameObject.name + " took damage! Remaining: " + currentHealth);
-
         if (currentHealth <= 0)
         {
             Die();
@@ -24,7 +23,8 @@ public class Health : MonoBehaviour
 
     void Die()
     {
-        Debug.Log(gameObject.name + " died!");
-        gameObject.SetActive(false); 
+        ScoreManager.Instance.PlayerDied(playerNumber);
+        gameObject.SetActive(false);
     }
+    
 }
