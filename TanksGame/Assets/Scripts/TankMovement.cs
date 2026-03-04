@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class TankMovement : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class TankMovement : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float rotateSpeed = 120f; // degrees per second
+    private float p1SpeedMultiplier = 1f;
+    private float p2SpeedMultiplier = 1f;
 
     private void OnEnable()
     {
@@ -53,4 +56,27 @@ public class TankMovement : MonoBehaviour
         tank.Rotate(0f, rotate, 0f);
         tank.position += tank.forward * move;
     }
+    
+    public void ActivateSpeedBoost(int playerNumber, float multiplier, float duration)
+        {
+            if (playerNumber == 1)
+                StartCoroutine(BoostRoutine(1, multiplier, duration));
+            else
+                StartCoroutine(BoostRoutine(2, multiplier, duration));
+        }
+    
+        private IEnumerator BoostRoutine(int playerNumber, float multiplier, float duration)
+        {
+            if (playerNumber == 1)
+                p1SpeedMultiplier = multiplier;
+            else
+                p2SpeedMultiplier = multiplier;
+    
+            yield return new WaitForSeconds(duration);
+    
+            if (playerNumber == 1)
+                p1SpeedMultiplier = 1f;
+            else
+                p2SpeedMultiplier = 1f;
+        }
 }
