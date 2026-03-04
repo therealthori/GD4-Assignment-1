@@ -913,6 +913,7 @@ GameObject:
   - component: {fileID: 832498994}
   - component: {fileID: 832498996}
   - component: {fileID: 832498997}
+  - component: {fileID: 832498998}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1018,6 +1019,19 @@ MonoBehaviour:
     playerName: 
   roundsToWin: 3
   roundEndDelay: 3
+--- !u!114 &832498998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832498993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f672cad737e814b87bc391e4128111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameSetup
+  firstRoundSceneIndex: 1
 --- !u!1 &1275572534
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,7 +1642,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 100, y: -85}
-  m_SizeDelta: {x: 185, y: 150}
+  m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1580409288
 MonoBehaviour:
