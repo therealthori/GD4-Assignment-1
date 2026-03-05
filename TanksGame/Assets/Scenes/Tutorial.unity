@@ -6038,7 +6038,7 @@ MonoBehaviour:
   minimumInterval: 0.3
   difficultyRamp: 3
   startSpawning: 0
-  startDelay: 3
+  startDelay: 200
 --- !u!4 &980850157547863195
 Transform:
   m_ObjectHideFlags: 0
