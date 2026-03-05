@@ -17,12 +17,21 @@
                 },
                 {
                     "name": "Shoot",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "02f13343-5062-4fc1-8e91-52a3a3f684a0",
-                    "expectedControlType": "",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Aim",
+                    "type": "Value",
+                    "id": "8796d5e3-c8b4-47e3-91d1-4334df7e2ba5",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -95,7 +104,7 @@
                 {
                     "name": "",
                     "id": "62c70f1d-c289-42fb-b0f9-6d7681bd8a6b",
-                    "path": "<Keyboard>/leftShift",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -106,11 +115,55 @@
                 {
                     "name": "",
                     "id": "d1e5f030-4ba7-44fa-85f2-9ecaae8d0df0",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "ZX",
+                    "id": "5676ad27-3b65-4a32-918a-7a3c6b77b9c8",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "left",
+                    "id": "91dcc8ec-10b3-45ac-8da1-7cca49007268",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "73db4c05-885d-4b03-9c39-6f1b060706e8",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "e1c6bc0f-3d54-47b5-9c51-58b59b9a27d2",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -137,6 +190,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Aim2",
+                    "type": "Value",
+                    "id": "c10b79f5-c951-4089-89f7-9c8b1d02d7a6",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -220,11 +282,72 @@
                 {
                     "name": "",
                     "id": "4b5d067e-69f1-457c-b942-7a3696434db4",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>1/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Shoot2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "NM",
+                    "id": "110d3620-febb-4877-a388-15a2027c0aee",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim2",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "left",
+                    "id": "25a40722-b328-45c1-ab8d-adbc9a95ac5d",
+                    "path": "<Keyboard>/n",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim2",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "05f8ced7-8185-4961-8373-463274b08472",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim2",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "FirstPlayerUI",
+            "id": "740efcb7-3f27-4365-9135-6c4a6857f2d5",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "1d20002b-fac2-4e2f-9db4-963dc83cab89",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "81fd7835-b70a-4a0c-88f3-4e7dbc188328",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
