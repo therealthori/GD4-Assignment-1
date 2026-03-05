@@ -270,12 +270,12 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Shoot2"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""c0327d63-9408-4948-a0d5-6b8fa97c55c4"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Aim2"",
@@ -368,7 +368,7 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4b5d067e-69f1-457c-b942-7a3696434db4"",
-                    ""path"": ""<Gamepad>1/buttonSouth"",
+                    ""path"": ""<Gamepad>1/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -408,6 +408,17 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
                     ""action"": ""Aim2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""17002fa7-7b0f-4025-ace3-7698b0513628"",
+                    ""path"": ""<Gamepad>1/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },

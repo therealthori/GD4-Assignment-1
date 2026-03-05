@@ -79,8 +79,8 @@ public class BulletHandler : MonoBehaviour
         float m1 = p1Shoot.action.ReadValue<float>();
         float m2 = p2Shoot.action.ReadValue<float>();
 
-        UpdateReload(ref p1ReloadTimer, ref p1Reloading, ref p1Ammo);
-        UpdateReload(ref p2ReloadTimer, ref p2Reloading, ref p2Ammo);
+        UpdateReload(m1, ref p1ReloadTimer, ref p1Reloading, ref p1Ammo);
+        UpdateReload(m2, ref p2ReloadTimer, ref p2Reloading, ref p2Ammo);
 
         if (p1Cooldown > 0f) p1Cooldown -= Time.deltaTime;
         if (p2Cooldown > 0f) p2Cooldown -= Time.deltaTime;
