@@ -330,9 +330,34 @@
             "id": "740efcb7-3f27-4365-9135-6c4a6857f2d5",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "New Action",
                     "type": "Button",
                     "id": "1d20002b-fac2-4e2f-9db4-963dc83cab89",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": []
+        },
+        {
+            "name": "UI",
+            "id": "6ddad32d-204f-4906-9e48-40da1f3c5d8d",
+            "actions": [
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "00194f28-c03f-4902-a6a9-c863df68cbd6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ready",
+                    "type": "Button",
+                    "id": "3fb7df6c-661f-44e9-b5f8-84851c9f40de",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -342,12 +367,45 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "81fd7835-b70a-4a0c-88f3-4e7dbc188328",
-                    "path": "",
+                    "id": "25dc81bb-71a2-4fe6-85dd-5aa07203494b",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e400f240-c600-4894-b905-cc7d82c7e8a1",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0d0114f2-9e7d-42bc-8a1f-1f49fd2686ff",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ready",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ba1e532b-d756-49d2-9ad1-1918ee637820",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ready",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
