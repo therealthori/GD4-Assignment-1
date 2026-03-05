@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1601457582861485979}
   - component: {fileID: 2781363856067058028}
   - component: {fileID: 988028028260125747}
+  - component: {fileID: -7921907631376083271}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -151,3 +152,24 @@ MonoBehaviour:
   p2Rb: {fileID: 0}
   tankMovement: {fileID: 1601457582861485979}
   bulletShotEffect: {fileID: 716267715375451247, guid: 90d7c87df0d786848a92c8e944a4e709, type: 3}
+--- !u!114 &-7921907631376083271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305140097919727158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ded752e249f814d8390039fe60023e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
+  playerScores:
+  - playerNumber: 0
+    score: 0
+    playerName: 
+  - playerNumber: 0
+    score: 0
+    playerName: 
+  roundsToWin: 3
+  roundEndDelay: 3
