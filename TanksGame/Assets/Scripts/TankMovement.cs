@@ -58,54 +58,96 @@ public class TankMovement : MonoBehaviour
     {
         if (tank == null) return;
 
-        float forwardInput = input.y;
-        float turnInput = input.x;
+        float inputMagnitude = input.magnitude;
 
-        //Acceleration
-        if (Mathf.Abs(forwardInput) > 0.1f)
+        // If player is pushing the stick
+        if (inputMagnitude > 0.1f)
         {
-            currentSpeed += forwardInput * acceleration * Time.deltaTime;
+            // Convert stick direction to world direction
+            Vector3 moveDir = new Vector3(input.x, 0f, input.y).normalized;
+
+            // Calculate target rotation
+            Quaternion targetRotation = Quaternion.LookRotation(moveDir);
+
+            // Smoothly rotate tank
+            tank.rotation = Quaternion.RotateTowards(
+                tank.rotation,
+                targetRotation,
+                turnSpeedAtMax * Time.deltaTime
+            );
+
+            // Accelerate forward
+            currentSpeed += acceleration * Time.deltaTime;
         }
         else
         {
-            //decelerate when there's no input
+            // Decelerate when no input
             if (currentSpeed > 0)
             {
                 currentSpeed -= deceleration * Time.deltaTime;
                 currentSpeed = Mathf.Max(currentSpeed, 0);
             }
-            else if (currentSpeed < 0)
-            {
-                currentSpeed += deceleration * Time.deltaTime;
-                currentSpeed = Mathf.Min(currentSpeed, 0);
-            }
         }
 
-        //clamp speeds
-        currentSpeed = Mathf.Clamp(currentSpeed, -maxReverseSpeed, maxForwardSpeed);
+        // Clamp speed
+        currentSpeed = Mathf.Clamp(currentSpeed, 0, maxForwardSpeed);
 
-        //Movement
+        // Move tank forward
         tank.position += tank.forward * currentSpeed * Time.deltaTime;
-
-        //Steering
-        if (Mathf.Abs(currentSpeed) > 0.1f)
-        {
-            float speedFactor = Mathf.Abs(currentSpeed) / maxForwardSpeed;
-            float turnAmount = turnInput * turnSpeedAtMax * speedFactor * Time.deltaTime;
-
-            //Reverse
-            if (currentSpeed < 0)
-                turnAmount *= -1f;
-
-            tank.Rotate(0f, turnAmount, 0f);
-        }
-        //// X input rotates the tank body, Y input moves forward/back
-        //float move   = input.y * moveSpeed * Time.deltaTime;
-        //float rotate = input.x * rotateSpeed * Time.deltaTime;
-
-        //tank.Rotate(0f, rotate, 0f);
-        //tank.position += tank.forward * move;
     }
+
+    //private void HandleTank(Transform tank, Vector2 input, ref float currentSpeed)
+    //{
+    //    if (tank == null) return;
+
+    //    float forwardInput = input.y;
+    //    float turnInput = input.x;
+
+    //    //Acceleration
+    //    if (Mathf.Abs(forwardInput) > 0.1f)
+    //    {
+    //        currentSpeed += forwardInput * acceleration * Time.deltaTime;
+    //    }
+    //    else
+    //    {
+    //        //decelerate when there's no input
+    //        if (currentSpeed > 0)
+    //        {
+    //            currentSpeed -= deceleration * Time.deltaTime;
+    //            currentSpeed = Mathf.Max(currentSpeed, 0);
+    //        }
+    //        else if (currentSpeed < 0)
+    //        {
+    //            currentSpeed += deceleration * Time.deltaTime;
+    //            currentSpeed = Mathf.Min(currentSpeed, 0);
+    //        }
+    //    }
+
+    //    //clamp speeds
+    //    currentSpeed = Mathf.Clamp(currentSpeed, -maxReverseSpeed, maxForwardSpeed);
+
+    //    //Movement
+    //    tank.position += tank.forward * currentSpeed * Time.deltaTime;
+
+    //    //Steering
+    //    if (Mathf.Abs(currentSpeed) > 0.1f)
+    //    {
+    //        float speedFactor = Mathf.Abs(currentSpeed) / maxForwardSpeed;
+    //        float turnAmount = turnInput * turnSpeedAtMax * speedFactor * Time.deltaTime;
+
+    //        //Reverse
+    //        if (currentSpeed < 0)
+    //            turnAmount *= -1f;
+
+    //        tank.Rotate(0f, turnAmount, 0f);
+    //    }
+    //    //// X input rotates the tank body, Y input moves forward/back
+    //    //float move   = input.y * moveSpeed * Time.deltaTime;
+    //    //float rotate = input.x * rotateSpeed * Time.deltaTime;
+
+    //    //tank.Rotate(0f, rotate, 0f);
+    //    //tank.position += tank.forward * move;
+    //}
 
     //public void ApplyRecoil(int playerIndex, float recoilAmount)
     //{
