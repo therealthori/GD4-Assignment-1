@@ -416,9 +416,34 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
             ""id"": ""740efcb7-3f27-4365-9135-6c4a6857f2d5"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""New Action"",
                     ""type"": ""Button"",
                     ""id"": ""1d20002b-fac2-4e2f-9db4-963dc83cab89"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": []
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""6ddad32d-204f-4906-9e48-40da1f3c5d8d"",
+            ""actions"": [
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""00194f28-c03f-4902-a6a9-c863df68cbd6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ready"",
+                    ""type"": ""Button"",
+                    ""id"": ""3fb7df6c-661f-44e9-b5f8-84851c9f40de"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -428,12 +453,45 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""81fd7835-b70a-4a0c-88f3-4e7dbc188328"",
-                    ""path"": """",
+                    ""id"": ""25dc81bb-71a2-4fe6-85dd-5aa07203494b"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e400f240-c600-4894-b905-cc7d82c7e8a1"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d0114f2-9e7d-42bc-8a1f-1f49fd2686ff"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ready"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ba1e532b-d756-49d2-9ad1-1918ee637820"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ready"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -454,7 +512,11 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
         m_SecondPlayer_Aim2 = m_SecondPlayer.FindAction("Aim2", throwIfNotFound: true);
         // FirstPlayerUI
         m_FirstPlayerUI = asset.FindActionMap("FirstPlayerUI", throwIfNotFound: true);
-        m_FirstPlayerUI_Newaction = m_FirstPlayerUI.FindAction("New action", throwIfNotFound: true);
+        m_FirstPlayerUI_NewAction = m_FirstPlayerUI.FindAction("New Action", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Select = m_UI.FindAction("Select", throwIfNotFound: true);
+        m_UI_Ready = m_UI.FindAction("Ready", throwIfNotFound: true);
     }
 
     ~@TankControls()
@@ -462,6 +524,7 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_FirstPlayer.enabled, "This will cause a leak and performance issues, TankControls.FirstPlayer.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_SecondPlayer.enabled, "This will cause a leak and performance issues, TankControls.SecondPlayer.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_FirstPlayerUI.enabled, "This will cause a leak and performance issues, TankControls.FirstPlayerUI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, TankControls.UI.Disable() has not been called.");
     }
 
     /// <summary>
@@ -773,7 +836,7 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
     // FirstPlayerUI
     private readonly InputActionMap m_FirstPlayerUI;
     private List<IFirstPlayerUIActions> m_FirstPlayerUIActionsCallbackInterfaces = new List<IFirstPlayerUIActions>();
-    private readonly InputAction m_FirstPlayerUI_Newaction;
+    private readonly InputAction m_FirstPlayerUI_NewAction;
     /// <summary>
     /// Provides access to input actions defined in input action map "FirstPlayerUI".
     /// </summary>
@@ -786,9 +849,9 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
         /// </summary>
         public FirstPlayerUIActions(@TankControls wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "FirstPlayerUI/Newaction".
+        /// Provides access to the underlying input action "FirstPlayerUI/NewAction".
         /// </summary>
-        public InputAction @Newaction => m_Wrapper.m_FirstPlayerUI_Newaction;
+        public InputAction @NewAction => m_Wrapper.m_FirstPlayerUI_NewAction;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -815,9 +878,9 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_FirstPlayerUIActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_FirstPlayerUIActionsCallbackInterfaces.Add(instance);
-            @Newaction.started += instance.OnNewaction;
-            @Newaction.performed += instance.OnNewaction;
-            @Newaction.canceled += instance.OnNewaction;
+            @NewAction.started += instance.OnNewAction;
+            @NewAction.performed += instance.OnNewAction;
+            @NewAction.canceled += instance.OnNewAction;
         }
 
         /// <summary>
@@ -829,9 +892,9 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
         /// <seealso cref="FirstPlayerUIActions" />
         private void UnregisterCallbacks(IFirstPlayerUIActions instance)
         {
-            @Newaction.started -= instance.OnNewaction;
-            @Newaction.performed -= instance.OnNewaction;
-            @Newaction.canceled -= instance.OnNewaction;
+            @NewAction.started -= instance.OnNewAction;
+            @NewAction.performed -= instance.OnNewAction;
+            @NewAction.canceled -= instance.OnNewAction;
         }
 
         /// <summary>
@@ -865,6 +928,113 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="FirstPlayerUIActions" /> instance referencing this action map.
     /// </summary>
     public FirstPlayerUIActions @FirstPlayerUI => new FirstPlayerUIActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_Select;
+    private readonly InputAction m_UI_Ready;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "UI".
+    /// </summary>
+    public struct UIActions
+    {
+        private @TankControls m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public UIActions(@TankControls wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "UI/Select".
+        /// </summary>
+        public InputAction @Select => m_Wrapper.m_UI_Select;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/Ready".
+        /// </summary>
+        public InputAction @Ready => m_Wrapper.m_UI_Ready;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="UIActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="UIActions" />
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @Select.started += instance.OnSelect;
+            @Select.performed += instance.OnSelect;
+            @Select.canceled += instance.OnSelect;
+            @Ready.started += instance.OnReady;
+            @Ready.performed += instance.OnReady;
+            @Ready.canceled += instance.OnReady;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="UIActions" />
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @Select.started -= instance.OnSelect;
+            @Select.performed -= instance.OnSelect;
+            @Select.canceled -= instance.OnSelect;
+            @Ready.started -= instance.OnReady;
+            @Ready.performed -= instance.OnReady;
+            @Ready.canceled -= instance.OnReady;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="UIActions.UnregisterCallbacks(IUIActions)" />.
+        /// </summary>
+        /// <seealso cref="UIActions.UnregisterCallbacks(IUIActions)" />
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="UIActions.AddCallbacks(IUIActions)" />
+        /// <seealso cref="UIActions.RemoveCallbacks(IUIActions)" />
+        /// <seealso cref="UIActions.UnregisterCallbacks(IUIActions)" />
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="UIActions" /> instance referencing this action map.
+    /// </summary>
+    public UIActions @UI => new UIActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "FirstPlayer" which allows adding and removing callbacks.
     /// </summary>
@@ -931,11 +1101,33 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
     public interface IFirstPlayerUIActions
     {
         /// <summary>
-        /// Method invoked when associated input action "New action" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "New Action" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnNewAction(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="UIActions.AddCallbacks(IUIActions)" />
+    /// <seealso cref="UIActions.RemoveCallbacks(IUIActions)" />
+    public interface IUIActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Select" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSelect(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Ready" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnReady(InputAction.CallbackContext context);
     }
 }
