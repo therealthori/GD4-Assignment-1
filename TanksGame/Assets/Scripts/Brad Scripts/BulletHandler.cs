@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class BulletHandler : MonoBehaviour
 {
@@ -20,8 +21,24 @@ public class BulletHandler : MonoBehaviour
     //private float p1NextFireTime = 0f;
     //private float p2NextFireTime = 0f;
 
-    private float p1Cooldown = 0f;
-    private float p2Cooldown = 0f;
+    [SerializeField] private float p1Cooldown = 0f;
+    [SerializeField] private float p2Cooldown = 0f;
+
+    //[SerializeField] private (note, this is for the reload UI)
+
+    [Header("Magazine Settings")]
+    [SerializeField] private int magazineSize = 5;
+    [SerializeField] private float reloadTime = 2f;
+
+    [SerializeField] private int p1Ammo;
+    [SerializeField] private int p2Ammo;
+
+    [SerializeField] private float p1ReloadTimer = 0f;
+    [SerializeField] private float p2ReloadTimer = 0f;
+
+    [SerializeField] private bool p1Reloading = false;
+    [SerializeField] private bool p2Reloading = false;
+
 
     [Header("Recoil Settings")]
     [SerializeField] private float recoilForce = 3f;
@@ -30,6 +47,8 @@ public class BulletHandler : MonoBehaviour
     [SerializeField] private Rigidbody p2Rb;
 
     [SerializeField] private TankMovement tankMovement;
+
+    [SerializeField] private ParticleSystem bulletShotEffect;
 
     private void OnEnable()
     {
@@ -46,7 +65,8 @@ public class BulletHandler : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        p1Ammo = magazineSize;
+        p2Ammo = magazineSize;
     }
 
     // Update is called once per frame
@@ -59,12 +79,18 @@ public class BulletHandler : MonoBehaviour
         float m1 = p1Shoot.action.ReadValue<float>();
         float m2 = p2Shoot.action.ReadValue<float>();
 
+        UpdateReload(ref p1ReloadTimer, ref p1Reloading, ref p1Ammo);
+        UpdateReload(ref p2ReloadTimer, ref p2Reloading, ref p2Ammo);
+
+        if (p1Cooldown > 0f) p1Cooldown -= Time.deltaTime;
+        if (p2Cooldown > 0f) p2Cooldown -= Time.deltaTime;
+
         // countdown timers
         if (p1Cooldown > 0f) p1Cooldown -= Time.deltaTime;
         if (p2Cooldown > 0f) p2Cooldown -= Time.deltaTime;
 
-        HandleShooting(p1FirePoint, m1, ref p1Cooldown);
-        HandleShooting(p2FirePoint, m2, ref p2Cooldown);
+        HandleShooting(p1FirePoint, m1, ref p1Cooldown, ref p1Ammo, ref p1Reloading, ref p1ReloadTimer);
+        HandleShooting(p2FirePoint, m2, ref p2Cooldown, ref p2Ammo, ref p2Reloading, ref p2ReloadTimer);
 
 
         //if (Input.GetKey("space") && Time.time > nextFireTime)
@@ -74,13 +100,15 @@ public class BulletHandler : MonoBehaviour
         //}
     }
 
-    private void HandleShooting(Transform firePoint, float input, ref float cooldown)
-    {
-        if (firePoint == null) return;
+    private void HandleShooting(Transform firePoint, float input, ref float cooldown, ref int ammo, ref bool reloading, ref float reloadTimer)
+{
+        if (firePoint == null || reloading) return;
 
-        if (input > 0.1f && cooldown <= 0f)
+        if (input > 0.1f && cooldown <= 0f && ammo > 0)
         {
             cooldown = fireRate;
+            ammo--;
+            //bulletShotEffect.Play();
 
             GameObject bulletInstance = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
@@ -92,6 +120,36 @@ public class BulletHandler : MonoBehaviour
             }
 
             Destroy(bulletInstance, 3f);
+            //bulletShotEffect.Stop();
+
+            if (ammo <= 0)
+            {
+                reloading = true;
+                reloadTimer = reloadTime;
+            }
+        }
+    }
+
+    public float GetP1ReloadPercent()
+    {
+        if (!p1Reloading) return 1f;
+        return 1f - (p1ReloadTimer / reloadTime);
+    }
+    public int GetP1Ammo()
+    {
+        return p1Ammo;
+    }
+
+    private void UpdateReload(ref float reloadTimer, ref bool reloading, ref int ammo)
+    {
+        if (!reloading) return;
+
+        reloadTimer -= Time.deltaTime;
+
+        if (reloadTimer <= 0f)
+        {
+            reloading = false;
+            ammo = magazineSize;
         }
     }
 }

@@ -130,13 +130,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletHandler
   bulletPrefab: {fileID: 1222251889197616295, guid: 0c84013838b64ee489bb5d3eeee25230, type: 3}
-  bulletSpeed: 65
-  fireRate: 2
+  bulletSpeed: 30
+  fireRate: 0.5
   p1FirePoint: {fileID: 0}
   p2FirePoint: {fileID: 0}
   p1Shoot: {fileID: 7867493501857597148, guid: b9277160c87458540bd2dcab2d8c1817, type: 3}
   p2Shoot: {fileID: -3523710116343174889, guid: b9277160c87458540bd2dcab2d8c1817, type: 3}
+  p1Cooldown: 0
+  p2Cooldown: 0
+  magazineSize: 5
+  reloadTime: 2
+  p1Ammo: 0
+  p2Ammo: 0
+  p1ReloadTimer: 0
+  p2ReloadTimer: 0
+  p1Reloading: 0
+  p2Reloading: 0
   recoilForce: 3
   p1Rb: {fileID: 0}
   p2Rb: {fileID: 0}
   tankMovement: {fileID: 1601457582861485979}
+  bulletShotEffect: {fileID: 716267715375451247, guid: 90d7c87df0d786848a92c8e944a4e709, type: 3}
