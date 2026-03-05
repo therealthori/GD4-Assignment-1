@@ -1,9 +1,18 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
 
 public class TankMovement : MonoBehaviour
 {
+    [Header("Car Settings")]
+    [SerializeField] private float acceleration = 8f;
+    [SerializeField] private float deceleration = 10f;
+    [SerializeField] private float maxForwardSpeed = 8f;
+    [SerializeField] private float maxReverseSpeed = 4f;
+    [SerializeField] private float turnSpeedAtMax = 120f;
+
+    private float p1CurrentSpeed = 0f;
+    private float p2CurrentSpeed = 0f;
+
     [Header("Actions")]
     [SerializeField] private InputActionReference p1Move;
     [SerializeField] private InputActionReference p2Move;
@@ -12,11 +21,11 @@ public class TankMovement : MonoBehaviour
     [SerializeField] private Transform p1;
     [SerializeField] private Transform p2;
 
-    [Header("Movement")]
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float rotateSpeed = 120f; // degrees per second
-    private float p1SpeedMultiplier = 1f;
-    private float p2SpeedMultiplier = 1f;
+    //[Header("Movement")]
+    //[SerializeField] private float moveSpeed = 5f;
+    //[SerializeField] private float rotateSpeed = 120f; // degrees per second
+    //[SerializeField] private float accel = 0.5f;
+    //[SerializeField] private float currentSpeed = 0;
 
     private void OnEnable()
     {
@@ -41,42 +50,68 @@ public class TankMovement : MonoBehaviour
         Vector2 m2 = gamepad2 != null ? gamepad2.leftStick.ReadValue() 
             : p2Move.action.ReadValue<Vector2>();
         
-        HandleTank(p1, p1Move.action.ReadValue<Vector2>());
-        HandleTank(p2, p2Move.action.ReadValue<Vector2>());
+        HandleTank(p1, m1,ref p1CurrentSpeed);
+        HandleTank(p2, m2, ref p2CurrentSpeed);
     }
 
-    private void HandleTank(Transform tank, Vector2 input)
+    private void HandleTank(Transform tank, Vector2 input, ref float currentSpeed)
     {
         if (tank == null) return;
 
-        // X input rotates the tank body, Y input moves forward/back
-        float move   = input.y * moveSpeed * Time.deltaTime;
-        float rotate = input.x * rotateSpeed * Time.deltaTime;
+        float forwardInput = input.y;
+        float turnInput = input.x;
 
-        tank.Rotate(0f, rotate, 0f);
-        tank.position += tank.forward * move;
+        //Acceleration
+        if (Mathf.Abs(forwardInput) > 0.1f)
+        {
+            currentSpeed += forwardInput * acceleration * Time.deltaTime;
+        }
+        else
+        {
+            //decelerate when there's no input
+            if (currentSpeed > 0)
+            {
+                currentSpeed -= deceleration * Time.deltaTime;
+                currentSpeed = Mathf.Max(currentSpeed, 0);
+            }
+            else if (currentSpeed < 0)
+            {
+                currentSpeed += deceleration * Time.deltaTime;
+                currentSpeed = Mathf.Min(currentSpeed, 0);
+            }
+        }
+
+        //clamp speeds
+        currentSpeed = Mathf.Clamp(currentSpeed, -maxReverseSpeed, maxForwardSpeed);
+
+        //Movement
+        tank.position += tank.forward * currentSpeed * Time.deltaTime;
+
+        //Steering
+        if (Mathf.Abs(currentSpeed) > 0.1f)
+        {
+            float speedFactor = Mathf.Abs(currentSpeed) / maxForwardSpeed;
+            float turnAmount = turnInput * turnSpeedAtMax * speedFactor * Time.deltaTime;
+
+            //Reverse
+            if (currentSpeed < 0)
+                turnAmount *= -1f;
+
+            tank.Rotate(0f, turnAmount, 0f);
+        }
+        //// X input rotates the tank body, Y input moves forward/back
+        //float move   = input.y * moveSpeed * Time.deltaTime;
+        //float rotate = input.x * rotateSpeed * Time.deltaTime;
+
+        //tank.Rotate(0f, rotate, 0f);
+        //tank.position += tank.forward * move;
     }
-    
-    public void ActivateSpeedBoost(int playerNumber, float multiplier, float duration)
-        {
-            if (playerNumber == 1)
-                StartCoroutine(BoostRoutine(1, multiplier, duration));
-            else
-                StartCoroutine(BoostRoutine(2, multiplier, duration));
-        }
-    
-        private IEnumerator BoostRoutine(int playerNumber, float multiplier, float duration)
-        {
-            if (playerNumber == 1)
-                p1SpeedMultiplier = multiplier;
-            else
-                p2SpeedMultiplier = multiplier;
-    
-            yield return new WaitForSeconds(duration);
-    
-            if (playerNumber == 1)
-                p1SpeedMultiplier = 1f;
-            else
-                p2SpeedMultiplier = 1f;
-        }
+
+    //public void ApplyRecoil(int playerIndex, float recoilAmount)
+    //{
+    //    if (playerIndex == 1)
+    //        p1CurrentSpeed -= recoilAmount;
+    //    else if (playerIndex == 2)
+    //        p2CurrentSpeed -= recoilAmount;
+    //}
 }
