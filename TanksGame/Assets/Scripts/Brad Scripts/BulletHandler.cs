@@ -76,8 +76,13 @@ public class BulletHandler : MonoBehaviour
         var gamepad2 = Gamepad.all.Count > 1 ? Gamepad.all[1] : null;
 
         // Fall back to action references if no gamepad found
-        float m1 = p1Shoot.action.ReadValue<float>();
-        float m2 = p2Shoot.action.ReadValue<float>();
+        //float m1 = p1Shoot.action.ReadValue<float>();
+        //float m2 = p2Shoot.action.ReadValue<float>();
+
+        float m1 = gamepad1 != null ? gamepad1.rightTrigger.ReadValue() : p1Shoot.action.ReadValue<float>();
+        float m2 = gamepad2 != null ? gamepad2.rightTrigger.ReadValue() : p2Shoot.action.ReadValue<float>();
+
+
 
         UpdateReload(ref p1ReloadTimer, ref p1Reloading, ref p1Ammo);
         UpdateReload(ref p2ReloadTimer, ref p2Reloading, ref p2Ammo);
