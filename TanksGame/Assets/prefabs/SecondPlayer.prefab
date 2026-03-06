@@ -840,6 +840,7 @@ GameObject:
   - component: {fileID: 2432694335427481269}
   - component: {fileID: 2355518481949917153}
   - component: {fileID: 9106017067795094559}
+  - component: {fileID: 3949526998159991545}
   m_Layer: 0
   m_Name: SecondPlayer
   m_TagString: Untagged
@@ -1000,6 +1001,21 @@ MonoBehaviour:
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3949526998159991545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8655481466885092980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95f8e35c5c79fe34c99e631a0e5dccaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  playerNumber: 2
+  maxHealth: 100
+  shieldVisual: {fileID: 0}
 --- !u!1 &8849991469561743824
 GameObject:
   m_ObjectHideFlags: 0

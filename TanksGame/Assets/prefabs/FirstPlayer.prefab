@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: 2716718698850799167}
   - component: {fileID: 6519364577937212965}
   - component: {fileID: 6771023919310071766}
+  - component: {fileID: 1549237319314925116}
   m_Layer: 0
   m_Name: FirstPlayer
   m_TagString: Untagged
@@ -498,6 +499,21 @@ MonoBehaviour:
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1549237319314925116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2595227187404241735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95f8e35c5c79fe34c99e631a0e5dccaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  playerNumber: 1
+  maxHealth: 100
+  shieldVisual: {fileID: 0}
 --- !u!1 &5022173186584880666
 GameObject:
   m_ObjectHideFlags: 0

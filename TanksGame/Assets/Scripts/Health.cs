@@ -6,6 +6,8 @@ public class Health : MonoBehaviour
     public int playerNumber; // 1 or 2
     public float maxHealth = 100f;
     private float currentHealth;
+    
+    public GameObject deathEffect;
     private bool isShielded = false;
     
     [Header("Shield Visual")]
@@ -54,6 +56,11 @@ public class Health : MonoBehaviour
 
     void Die()
     {
+         if (deathEffect != null)
+        {
+            Instantiate(deathEffect, transform.position, transform.rotation);
+        }
+
         ScoreManager.Instance.PlayerDied(playerNumber);
         gameObject.SetActive(false);
     }

@@ -1,18 +1,27 @@
 using UnityEngine;
+using System.Collections;
 
 public class Lazer : MonoBehaviour
 {
-   public Transform[] shootPoints;
+     [Header("Laser Setup")]
+    public Transform[] shootPoints;
     public float maxDistance = 50f;
-
     public LayerMask stopLayers;
-    public LayerMask damageLayers;
-
     public LineRenderer linePrefab;
 
-    public float damagePerSecond = 25f;
+    [Header("Damage")]
+    public float damage = 100f;             
+    public string damageTag = "Player";
+
+    [Header("Particles")]
+    public GameObject hitParticles;
+
+    [Header("Sound")]
+    public AudioSource laserAudioSource;
+    public AudioClip laserSound;
 
     private LineRenderer[] lines;
+    private bool hasDamagedPlayer = false; // only damage once
 
     void Start()
     {
@@ -23,6 +32,14 @@ public class Lazer : MonoBehaviour
             LineRenderer line = Instantiate(linePrefab, shootPoints[i]);
             line.positionCount = 2;
             lines[i] = line;
+        }
+
+        // Play laser sound if assigned
+        if (laserAudioSource != null && laserSound != null)
+        {
+            laserAudioSource.clip = laserSound;
+            laserAudioSource.loop = true;
+            laserAudioSource.Play();
         }
     }
 
@@ -41,27 +58,35 @@ public class Lazer : MonoBehaviour
 
         Vector3 startPos = shootPoint.position;
         Vector3 direction = shootPoint.forward;
-
-        RaycastHit hit;
-
         Vector3 endPos = startPos + direction * maxDistance;
 
-        if (Physics.Raycast(startPos, direction, out hit, maxDistance))
+        // Draw debug ray in Scene view
+        Debug.DrawRay(startPos, direction * maxDistance, Color.red);
+
+        if (Physics.Raycast(startPos, direction, out RaycastHit hit, maxDistance))
         {
             endPos = hit.point;
 
-            // Damage player
-            if (((1 << hit.collider.gameObject.layer) & damageLayers) != 0)
-            {
-                Health health = hit.collider.GetComponent<Health>();
+            Debug.Log("Laser hit: " + hit.collider.name);
 
-                if (health != null)
+            // Deal 100 damage if it's the player
+            if (!hasDamagedPlayer && hit.collider.CompareTag(damageTag))
+            {
+                Health playerHealth = hit.collider.GetComponent<Health>();
+                if (playerHealth != null)
                 {
-                    health.TakeDamage(damagePerSecond * Time.deltaTime);
+                    playerHealth.TakeDamage(damage); // This will trigger explosion if health hits 0
+                    Debug.Log("Laser damaged player: " + hit.collider.name);
                 }
+
+                // Spawn hit particles
+                if (hitParticles != null)
+                    Instantiate(hitParticles, hit.point, Quaternion.LookRotation(hit.normal));
+
+                hasDamagedPlayer = true; // only damage once
             }
 
-            // Stop at wall layers
+            // Stop laser at walls
             if (((1 << hit.collider.gameObject.layer) & stopLayers) != 0)
             {
                 endPos = hit.point;
