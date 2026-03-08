@@ -9,14 +9,19 @@ public class Health : MonoBehaviour
     
     public GameObject deathEffect;
     private bool isShielded = false;
-    
+
+    [Header( "sound")]
+    public AudioClip deathSound;
+    private AudioSource audioSource;
+
     [Header("Shield Visual")]
     public GameObject shieldVisual;
 
     void Start()
     {
         currentHealth = maxHealth;
-        
+        audioSource = GetComponent<AudioSource>();
+
         if (shieldVisual != null)
                     shieldVisual.SetActive(false);
     }
@@ -56,13 +61,18 @@ public class Health : MonoBehaviour
 
     void Die()
     {
-         if (deathEffect != null)
-        {
-            Instantiate(deathEffect, transform.position, transform.rotation);
-        }
+       if (deathEffect != null)
+    {
+        Instantiate(deathEffect, transform.position, transform.rotation);
+    }
 
-        ScoreManager.Instance.PlayerDied(playerNumber);
-        gameObject.SetActive(false);
+    if (deathSound != null)
+    {
+        AudioSource.PlayClipAtPoint(deathSound, transform.position);
+    }
+
+    ScoreManager.Instance.PlayerDied(playerNumber);
+    gameObject.SetActive(false);
     }
     
 }
