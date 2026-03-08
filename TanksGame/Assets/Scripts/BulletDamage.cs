@@ -7,7 +7,7 @@ public class BulletDamage : MonoBehaviour
     public string damageTag = "Player";
 
     [Header("Tags")]
-    public string destructibleTag = "Destructible";
+    public string destructibleTag = "destructible";
 
     [Header("Bounce")]
     public int maxBounces = 1;
@@ -41,12 +41,20 @@ public class BulletDamage : MonoBehaviour
             }
         }
 
-        // DESTROY DESTRUCTIBLE OBJECTS
-        if (collision.collider.CompareTag(destructibleTag))
-        {
-            Destroy(collision.collider.gameObject);
-            Debug.Log("Destroyed destructible object");
-        }
+       if (collision.collider.CompareTag(destructibleTag))
+{
+    Destroy(collision.collider.gameObject);
+    Debug.Log("Destroyed destructible object");
+
+    if (destroyEffect != null)
+        Instantiate(destroyEffect, transform.position, Quaternion.identity);
+
+    if (explodeSound != null)
+        AudioSource.PlayClipAtPoint(explodeSound, transform.position);
+
+    Destroy(gameObject); // despawn bullet
+    return; 
+}
 
         bounceCount++;
 

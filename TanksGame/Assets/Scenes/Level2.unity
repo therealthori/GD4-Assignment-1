@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 55646840}
   m_Layer: 0
   m_Name: Cube (23)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 67185468}
   m_Layer: 0
   m_Name: Cube (4)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1564,7 +1564,7 @@ GameObject:
   - component: {fileID: 303972635}
   m_Layer: 0
   m_Name: Cube (13)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2216,7 +2216,7 @@ GameObject:
   - component: {fileID: 344719637}
   m_Layer: 0
   m_Name: Cube (19)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2750,7 +2750,7 @@ GameObject:
   - component: {fileID: 392522175}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3467,7 +3467,7 @@ GameObject:
   - component: {fileID: 436489706}
   m_Layer: 0
   m_Name: Cube (10)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3823,7 +3823,7 @@ GameObject:
   - component: {fileID: 612807152}
   m_Layer: 0
   m_Name: Cube (14)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4179,7 +4179,7 @@ GameObject:
   - component: {fileID: 706108601}
   m_Layer: 0
   m_Name: Cube (9)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5425,7 +5425,7 @@ GameObject:
   - component: {fileID: 880293808}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5781,7 +5781,7 @@ GameObject:
   - component: {fileID: 885783404}
   m_Layer: 0
   m_Name: Cube (18)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6315,7 +6315,7 @@ GameObject:
   - component: {fileID: 954179003}
   m_Layer: 0
   m_Name: Cube (20)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6671,7 +6671,7 @@ GameObject:
   - component: {fileID: 996597897}
   m_Layer: 0
   m_Name: Cube (17)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7027,7 +7027,7 @@ GameObject:
   - component: {fileID: 999271803}
   m_Layer: 0
   m_Name: Cube (11)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7383,7 +7383,7 @@ GameObject:
   - component: {fileID: 1040638877}
   m_Layer: 0
   m_Name: Cube (3)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7771,9 +7771,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1773851481}
     - target: {fileID: 1693377999941237433, guid: acf124726055900459177546dfe24eb2, type: 3}
+      propertyPath: startDelay
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693377999941237433, guid: acf124726055900459177546dfe24eb2, type: 3}
       propertyPath: difficultyRamp
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2421797632259682610, guid: acf124726055900459177546dfe24eb2, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f0daa5f6dff6fd47b1a1b279e72ed4b, type: 2}
     - target: {fileID: 2492121147655542406, guid: acf124726055900459177546dfe24eb2, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -7879,7 +7887,7 @@ GameObject:
   - component: {fileID: 1056942508}
   m_Layer: 0
   m_Name: Cube (6)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8879,7 +8887,7 @@ GameObject:
   - component: {fileID: 1158923814}
   m_Layer: 0
   m_Name: Cube (16)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9502,7 +9510,7 @@ GameObject:
   - component: {fileID: 1338607155}
   m_Layer: 0
   m_Name: Cube (12)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10036,7 +10044,7 @@ GameObject:
   - component: {fileID: 1402173191}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10111,7 +10119,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+  - {fileID: 2100000, guid: 3b5cc91c3bf8cf74391252247f52fb59, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10477,7 +10485,7 @@ GameObject:
   - component: {fileID: 1459538957}
   m_Layer: 0
   m_Name: Cube (8)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11113,7 +11121,7 @@ GameObject:
   - component: {fileID: 1476216123}
   m_Layer: 0
   m_Name: Cube (5)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11469,7 +11477,7 @@ GameObject:
   - component: {fileID: 1539826721}
   m_Layer: 0
   m_Name: Cube (21)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11825,7 +11833,7 @@ GameObject:
   - component: {fileID: 1653351359}
   m_Layer: 0
   m_Name: Cube (22)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12596,7 +12604,7 @@ GameObject:
   - component: {fileID: 1743380948}
   m_Layer: 0
   m_Name: cubeholder
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12660,6 +12668,7 @@ MonoBehaviour:
   playerNumber: 2
   maxHealth: 100
   deathEffect: {fileID: 353388701213343594, guid: 1fe26ed72345259438bb567bb9574787, type: 3}
+  deathSound: {fileID: 0}
   shieldVisual: {fileID: 2495731101727496666, guid: 3a257f9a894c90b4db316d3f0bfe355d, type: 3}
 --- !u!43 &1773851481
 Mesh:
@@ -13033,7 +13042,7 @@ GameObject:
   - component: {fileID: 1875571868}
   m_Layer: 0
   m_Name: Cube (15)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14193,7 +14202,7 @@ GameObject:
   - component: {fileID: 2092683788}
   m_Layer: 0
   m_Name: Cube (7)
-  m_TagString: destructible
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -77,6 +77,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 39066f32e7b9c6746865c06292065856, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2327294005689211495}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 39066f32e7b9c6746865c06292065856, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8974985624116943157}
   m_SourcePrefab: {fileID: 100100000, guid: 39066f32e7b9c6746865c06292065856, type: 3}
 --- !u!1 &1384749339441383309 stripped
 GameObject:
@@ -146,3 +149,22 @@ MonoBehaviour:
   fallSpeed: 20
   groundY: 0
   explosionParticles: {fileID: 6605014958901667319, guid: 9127f3fbab65a0d45b9ca1f81949ba9a, type: 3}
+--- !u!114 &-8974985624116943157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384749339441383309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72913be8ea9c8c44fbe7aaf73f93de59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BulletDamage
+  damage: 100
+  damageTag: Player
+  destructibleTag: destructible
+  maxBounces: 1
+  destroyEffect: {fileID: 0}
+  bounceSound: {fileID: 0}
+  explodeSound: {fileID: 0}
