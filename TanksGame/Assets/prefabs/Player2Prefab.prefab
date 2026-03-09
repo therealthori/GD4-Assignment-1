@@ -253,6 +253,7 @@ MonoBehaviour:
   maxHealth: 100
   deathEffect: {fileID: 353388701213343594, guid: 1fe26ed72345259438bb567bb9574787, type: 3}
   deathSound: {fileID: 8300000, guid: 423dbc74f9d5895419410c54a310cb2d, type: 3}
+  audioSource: {fileID: 0}
   shieldVisual: {fileID: 2495731101727496666, guid: 3a257f9a894c90b4db316d3f0bfe355d, type: 3}
 --- !u!1 &3141721949318168532
 GameObject:
@@ -716,7 +717,7 @@ Transform:
   m_GameObject: {fileID: 7690060453090758631}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.557}
+  m_LocalPosition: {x: 0, y: 0, z: 2.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
