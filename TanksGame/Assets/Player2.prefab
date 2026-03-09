@@ -273,6 +273,7 @@ MonoBehaviour:
   maxForwardSpeed: 4
   turnSpeedAtMax: 200
   moveAction: {fileID: 6467167166275652041, guid: b9277160c87458540bd2dcab2d8c1817, type: 3}
+  playerIndex: 1
 --- !u!65 &608385796167245816
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -334,6 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewAim
   aimAction: {fileID: -8692508096899999876, guid: b9277160c87458540bd2dcab2d8c1817, type: 3}
+  playerIndex: 1
   gun: {fileID: 5186272945484577092}
   rotateSpeed: 120
   line: {fileID: 0}
@@ -356,7 +358,7 @@ MonoBehaviour:
   bulletSpeed: 20
   fireRate: 0.5
   firePoint: {fileID: 1919284483077642353}
-  shootAction: {fileID: -3523710116343174889, guid: b9277160c87458540bd2dcab2d8c1817, type: 3}
+  playerIndex: 1
   magazineSize: 5
   reloadTime: 2
   recoilForce: 3
@@ -374,7 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95f8e35c5c79fe34c99e631a0e5dccaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  playerNumber: 1
+  playerNumber: 2
   maxHealth: 100
   deathEffect: {fileID: 353388701213343594, guid: 1fe26ed72345259438bb567bb9574787, type: 3}
   deathSound: {fileID: 8300000, guid: 8fa50397bd0f52d449ea4d3c23d870f4, type: 3}
@@ -484,7 +486,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5113103208196213827}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -530,6 +532,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 1d20002b-fac2-4e2f-9db4-963dc83cab89
     m_ActionName: FirstPlayerUI/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 707fa44e-920c-4d43-a6f6-578d3d32b44d
+    m_ActionName: 'FirstPlayer/Pause[/DualShock4GamepadHID1/start,/DualShock4GamepadHID/start]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 552e3f4b-b7bb-433d-b57d-ce0992987e28
+    m_ActionName: SecondPlayer/Pause2
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: SecondPlayer
