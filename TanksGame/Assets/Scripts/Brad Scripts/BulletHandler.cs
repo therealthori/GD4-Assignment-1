@@ -40,8 +40,8 @@ public class BulletHandler : MonoBehaviour
     [SerializeField] private bool p2Reloading = false;
 
 
-    //[Header("Recoil Settings")]
-    //[SerializeField] private float recoilForce = 3f;
+    [Header("Recoil Settings")]
+    [SerializeField] private float recoilForce = 3f;
 
     [SerializeField] private Rigidbody p1Rb;
     [SerializeField] private Rigidbody p2Rb;

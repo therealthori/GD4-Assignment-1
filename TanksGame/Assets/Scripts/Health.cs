@@ -12,7 +12,7 @@ public class Health : MonoBehaviour
 
     [Header( "sound")]
     public AudioClip deathSound;
-    private AudioSource audioSource;
+    public AudioSource audioSource;
 
     [Header("Shield Visual")]
     public GameObject shieldVisual;

@@ -92,15 +92,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef4ac11c0a606d644821ca3685baf2d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankMovement
-  acceleration: 8
-  deceleration: 10
-  maxForwardSpeed: 8
+  acceleration: 4
+  deceleration: 4
+  maxForwardSpeed: 4
   maxReverseSpeed: 4
-  turnSpeedAtMax: 120
+  turnSpeedAtMax: 200
   p1Move: {fileID: 7147951308470708111, guid: b9277160c87458540bd2dcab2d8c1817, type: 3}
   p2Move: {fileID: 6467167166275652041, guid: b9277160c87458540bd2dcab2d8c1817, type: 3}
-  p1: {fileID: 0}
-  p2: {fileID: 0}
+  p1: {fileID: 8619316442847035969, guid: 2347d3c375bc27449b36db56018da08d, type: 3}
+  p2: {fileID: 2664771090804188792, guid: 46f610e253cf05f4085a4e5de0de086b, type: 3}
 --- !u!114 &2781363856067058028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,12 +113,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b07b2be7a47fbe41a0d21040cf40f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankAim
-  warningText: {fileID: 0}
   p1Aim: {fileID: -5931293317124039207, guid: b9277160c87458540bd2dcab2d8c1817, type: 3}
   p2Aim: {fileID: -8692508096899999876, guid: b9277160c87458540bd2dcab2d8c1817, type: 3}
   p1Gun: {fileID: 0}
   p2Gun: {fileID: 0}
   rotateSpeed: 60
+  p1Line: {fileID: 0}
+  p2Line: {fileID: 0}
+  trajectoryDistance: 15
+  maxBounces: 1
+  scrollSpeed: 2
 --- !u!114 &988028028260125747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,8 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e66c5f8e1a0dde4180e8427b3ad087c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletHandler
-  bulletPrefab: {fileID: 1222251889197616295, guid: 0c84013838b64ee489bb5d3eeee25230, type: 3}
-  bulletSpeed: 30
+  bulletPrefab: {fileID: 3911246798291562347, guid: 0ddcd36374e705b45b2d334f5568d7c4, type: 3}
+  bulletSpeed: 10
   fireRate: 0.5
   p1FirePoint: {fileID: 0}
   p2FirePoint: {fileID: 0}
@@ -149,8 +153,8 @@ MonoBehaviour:
   p1Reloading: 0
   p2Reloading: 0
   recoilForce: 3
-  p1Rb: {fileID: 0}
-  p2Rb: {fileID: 0}
+  p1Rb: {fileID: 7742274293668298824, guid: 2347d3c375bc27449b36db56018da08d, type: 3}
+  p2Rb: {fileID: 5758491771536578875, guid: 46f610e253cf05f4085a4e5de0de086b, type: 3}
   tankMovement: {fileID: 1601457582861485979}
   bulletShotEffect: {fileID: 716267715375451247, guid: 90d7c87df0d786848a92c8e944a4e709, type: 3}
 --- !u!114 &-7921907631376083271
