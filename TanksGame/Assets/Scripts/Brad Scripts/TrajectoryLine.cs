@@ -40,13 +40,15 @@ public class TrajectoryLine : MonoBehaviour
 
             if (hit.collider.CompareTag("Player"))
             {
-                aimLine.startColor = enemyColor;
-                aimLine.endColor = enemyColor;
+                Debug.Log("AIM LINE HIT PLAYER TURN RED PLEASE!!!!");
+                Debug.Log(hit.collider.name);
+                aimLine.material.color = enemyColor;
+                //aimLine.endColor = enemyColor;
             }
             else
             {
-                aimLine.startColor = nonTargetColor;
-                aimLine.endColor = nonTargetColor;
+                aimLine.material.color = nonTargetColor;
+                //aimLine.endColor = nonTargetColor;
             }
         }
         else
@@ -56,8 +58,8 @@ public class TrajectoryLine : MonoBehaviour
             aimLine.SetPosition(0, start);
             aimLine.SetPosition(1, end);
 
-            aimLine.startColor = nonTargetColor;
-            aimLine.endColor = nonTargetColor;
+            aimLine.material.color = nonTargetColor;
+            //aimLine.endColor = nonTargetColor;
         }
     }
 }
