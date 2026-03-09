@@ -27,51 +27,34 @@ public class TankMovement : MonoBehaviour
     //[SerializeField] private float accel = 0.5f;
     //[SerializeField] private float currentSpeed = 0;
     
-    private void Awake()
-    {
-       DontDestroyOnLoad(gameObject);
-    }
-    
     private void Start()
     {
-       FindPlayers();
+        Health[] players = FindObjectsOfType<Health>();
+    
+        foreach (Health player in players)
+        {
+            if (player.playerNumber == 1)
+                p1 = player.transform;
+    
+            if (player.playerNumber == 2)
+                p2 = player.transform;
+        }
+        
+        Debug.Log("Player1: " + p1);
+        Debug.Log("Player2: " + p2);
     }
 
     private void OnEnable()
     {
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
         p1Move.action.Enable();
         p2Move.action.Enable();
     }
 
     private void OnDisable()
     {
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
         p1Move.action.Disable();
         p2Move.action.Disable();
     }
-    
-    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
-    {
-        FindPlayers();
-    }
-    
-    private void FindPlayers()
-        {
-            Health[] players = FindObjectsOfType<Health>();
-            
-            foreach (Health player in players)
-            {
-                if (player.playerNumber == 1)
-                    p1 = player.transform;
-                
-                if (player.playerNumber == 2)
-                    p2 = player.transform;
-            }
-            
-            Debug.Log("Player1 found: " + (p1 != null));
-            Debug.Log("Player2 found: " + (p2 != null));
-        }
 
     private void Update()
     {
