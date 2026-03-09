@@ -21,10 +21,11 @@ public class BulletDamage : MonoBehaviour
     public AudioClip explodeSound;
     private AudioSource audioSource;
 
-  void Start()
+    void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
+
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Bullet hit: " + collision.collider.name);
@@ -42,23 +43,23 @@ public class BulletDamage : MonoBehaviour
         }
 
        if (collision.collider.CompareTag(destructibleTag))
-{
-    Destroy(collision.collider.gameObject);
-    Debug.Log("Destroyed destructible object");
+       {
+            Destroy(collision.collider.gameObject);
+            Debug.Log("Destroyed destructible object");
 
-    if (destroyEffect != null)
-        Instantiate(destroyEffect, transform.position, Quaternion.identity);
+            if (destroyEffect != null)
+            Instantiate(destroyEffect, transform.position, Quaternion.identity);
 
-    if (explodeSound != null)
-        AudioSource.PlayClipAtPoint(explodeSound, transform.position);
+            if (explodeSound != null)
+            AudioSource.PlayClipAtPoint(explodeSound, transform.position);
 
-    Destroy(gameObject); // despawn bullet
-    return; 
-}
+            Destroy(gameObject); // despawn bullet
+            return; 
+       }
 
         bounceCount++;
 
-         if (bounceCount <= maxBounces)
+        if (bounceCount <= maxBounces)
         {
             if (audioSource != null && bounceSound != null)
                 audioSource.PlayOneShot(bounceSound);
