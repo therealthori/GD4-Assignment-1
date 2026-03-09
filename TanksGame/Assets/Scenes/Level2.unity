@@ -2144,6 +2144,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1424670758}
     - target: {fileID: 988028028260125747, guid: 0f23e0101ec8db446a7bc9b9108ec12c, type: 3}
+      propertyPath: bulletSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 988028028260125747, guid: 0f23e0101ec8db446a7bc9b9108ec12c, type: 3}
       propertyPath: p1FirePoint
       value: 
       objectReference: {fileID: 1127725102}
@@ -2151,6 +2155,10 @@ PrefabInstance:
       propertyPath: p2FirePoint
       value: 
       objectReference: {fileID: 426309269}
+    - target: {fileID: 988028028260125747, guid: 0f23e0101ec8db446a7bc9b9108ec12c, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 3911246798291562347, guid: 0ddcd36374e705b45b2d334f5568d7c4, type: 3}
     - target: {fileID: 1305140097919727158, guid: 0f23e0101ec8db446a7bc9b9108ec12c, type: 3}
       propertyPath: m_Name
       value: Manager
@@ -12415,10 +12423,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2Prefab
       objectReference: {fileID: 0}
-    - target: {fileID: 9009950131811017603, guid: 46f610e253cf05f4085a4e5de0de086b, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13615,10 +13619,6 @@ PrefabInstance:
     - target: {fileID: 1334137526633155893, guid: 2347d3c375bc27449b36db56018da08d, type: 3}
       propertyPath: m_Name
       value: Player1Prefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 1334137526633155893, guid: 2347d3c375bc27449b36db56018da08d, type: 3}
-      propertyPath: m_TagString
-      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7742274293668298824, guid: 2347d3c375bc27449b36db56018da08d, type: 3}
       propertyPath: m_Constraints
