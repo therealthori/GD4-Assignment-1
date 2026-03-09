@@ -5987,6 +5987,12 @@ MonoBehaviour:
     playerName: 
   roundsToWin: 5
   roundEndDelay: 5
+  winnerCanvas: {fileID: 0}
+  p1WinImage: {fileID: 0}
+  p2WinImage: {fileID: 0}
+  displayTime: 10
+  startSceneName: StartMenu
+  startSceneIndex: 0
 --- !u!1 &1305140097675186002
 GameObject:
   m_ObjectHideFlags: 0
