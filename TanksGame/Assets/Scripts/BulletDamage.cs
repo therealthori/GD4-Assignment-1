@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BulletDamage : MonoBehaviour
 {
-      [Header("Damage")]
+    [Header("Damage")]
     public float damage = 100f;
     public string damageTag = "Player";
 
@@ -19,8 +19,6 @@ public class BulletDamage : MonoBehaviour
     [Header("Sound")]
     public AudioClip bounceSound;
     public AudioClip explodeSound;
-    public AudioClip wallBreakSound;   // NEW
-
     private AudioSource audioSource;
 
     void Start()
@@ -32,7 +30,7 @@ public class BulletDamage : MonoBehaviour
     {
         Debug.Log("Bullet hit: " + collision.collider.name);
 
-        // DAMAGE PLAYER
+        // DAMAGE PLAYER (same idea as laser)
         if (collision.collider.CompareTag(damageTag))
         {
             Health health = collision.collider.GetComponentInParent<Health>();
@@ -44,20 +42,20 @@ public class BulletDamage : MonoBehaviour
             }
         }
 
-        // DESTROY DESTRUCTIBLE WALL
-        if (collision.collider.CompareTag(destructibleTag))
-        {
-            if (wallBreakSound != null)
-                AudioSource.PlayClipAtPoint(wallBreakSound, transform.position);
-
+       if (collision.collider.CompareTag(destructibleTag))
+       {
             Destroy(collision.collider.gameObject);
+            Debug.Log("Destroyed destructible object");
 
             if (destroyEffect != null)
-                Instantiate(destroyEffect, transform.position, Quaternion.identity);
+            Instantiate(destroyEffect, transform.position, Quaternion.identity);
 
-            Destroy(gameObject);
-            return;
-        }
+            if (explodeSound != null)
+            AudioSource.PlayClipAtPoint(explodeSound, transform.position);
+
+            Destroy(gameObject); // despawn bullet
+            return; 
+       }
 
         bounceCount++;
 
@@ -69,11 +67,13 @@ public class BulletDamage : MonoBehaviour
 
         if (bounceCount > maxBounces)
         {
-            if (explodeSound != null)
-                AudioSource.PlayClipAtPoint(explodeSound, transform.position);
+            if (audioSource != null && explodeSound != null)
+                audioSource.PlayOneShot(explodeSound);
 
             if (destroyEffect != null)
+            {
                 Instantiate(destroyEffect, transform.position, Quaternion.identity);
+            }
 
             Destroy(gameObject);
         }
