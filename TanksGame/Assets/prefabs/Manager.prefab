@@ -95,7 +95,6 @@ MonoBehaviour:
   acceleration: 8
   deceleration: 10
   maxForwardSpeed: 8
-  maxReverseSpeed: 4
   turnSpeedAtMax: 120
   p1Move: {fileID: 7147951308470708111, guid: b9277160c87458540bd2dcab2d8c1817, type: 3}
   p2Move: {fileID: 6467167166275652041, guid: b9277160c87458540bd2dcab2d8c1817, type: 3}
@@ -113,7 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b07b2be7a47fbe41a0d21040cf40f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankAim
-  warningText: {fileID: 0}
   p1Aim: {fileID: -5931293317124039207, guid: b9277160c87458540bd2dcab2d8c1817, type: 3}
   p2Aim: {fileID: -8692508096899999876, guid: b9277160c87458540bd2dcab2d8c1817, type: 3}
   p1Gun: {fileID: 0}
@@ -131,8 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e66c5f8e1a0dde4180e8427b3ad087c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletHandler
-  bulletPrefab: {fileID: 1222251889197616295, guid: 0c84013838b64ee489bb5d3eeee25230, type: 3}
-  bulletSpeed: 30
+  bulletPrefab: {fileID: 3911246798291562347, guid: 0ddcd36374e705b45b2d334f5568d7c4, type: 3}
+  bulletSpeed: 10
   fireRate: 0.5
   p1FirePoint: {fileID: 0}
   p2FirePoint: {fileID: 0}
@@ -148,7 +146,6 @@ MonoBehaviour:
   p2ReloadTimer: 0
   p1Reloading: 0
   p2Reloading: 0
-  recoilForce: 3
   p1Rb: {fileID: 0}
   p2Rb: {fileID: 0}
   tankMovement: {fileID: 1601457582861485979}

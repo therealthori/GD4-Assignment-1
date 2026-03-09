@@ -29,9 +29,28 @@ public class TankAim : MonoBehaviour
     //[SerializeField] private int maxBounces = 1;
 
     //[SerializeField] float scrollSpeed = 2f;
+    
+    private void Awake()
+        {
+           DontDestroyOnLoad(gameObject);
+        }
+        
+   private void Start()
+       {
+           //NEW NOTE: THIS IS NOT IMPORTANT!!! UNITY INPUT MANAGER WORKS TO RECONNECT PLAYERS. NO CODE NEEDED
+           //this isnt the usual way to do it, but it keeps track of which gamepad is assigned [0] first, and second, so the swapping doesnt happen
+           //if (Gamepad.all.Count > 0)
+               //p1Gamepad = Gamepad.all[0];
+   
+           //if (Gamepad.all.Count > 1)
+               //p2Gamepad = Gamepad.all[1];
+               
+               FindPlayers();
+       }
 
     private void OnEnable()
     {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
         p1Aim.action.Enable();
         p2Aim.action.Enable();
 
@@ -40,22 +59,34 @@ public class TankAim : MonoBehaviour
 
     private void OnDisable()
     {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
         p1Aim.action.Disable();
         p2Aim.action.Disable();
 
         //InputSystem.onDeviceChange -= OnDeviceChange;
     }
-
-    private void Start()
-    {
-        //NEW NOTE: THIS IS NOT IMPORTANT!!! UNITY INPUT MANAGER WORKS TO RECONNECT PLAYERS. NO CODE NEEDED
-        //this isnt the usual way to do it, but it keeps track of which gamepad is assigned [0] first, and second, so the swapping doesnt happen
-        //if (Gamepad.all.Count > 0)
-            //p1Gamepad = Gamepad.all[0];
-
-        //if (Gamepad.all.Count > 1)
-            //p2Gamepad = Gamepad.all[1];
-    }
+    
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+        {
+            FindPlayers();
+        }
+        
+    private void FindPlayers()
+            {
+                Health[] players = FindObjectsOfType<Health>();
+                
+                foreach (Health player in players)
+                {
+                    if (player.playerNumber == 1)
+                        p1Gun = player.transform;
+                    
+                    if (player.playerNumber == 2)
+                        p2Gun = player.transform;
+                }
+                
+                Debug.Log("Player1 found: " + (p1Gun != null));
+                Debug.Log("Player2 found: " + (p2Gun != null));
+            }
 
     private void Update()
     {
