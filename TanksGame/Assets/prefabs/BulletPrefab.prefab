@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8316388187875149734}
   - component: {fileID: 1164048717943258630}
   - component: {fileID: 4133431134734661379}
+  - component: {fileID: 457051309631218242}
   m_Layer: 0
   m_Name: BulletPrefab
   m_TagString: Untagged
@@ -141,6 +142,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &457051309631218242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222251889197616295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0951fb13888044e41bac6fdd6083dde8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Explosive
+  damage: 100
+  explosionForce: 800
+  explosionRadius: 3
+  upwardsModifier: 1
+  delayBeforeExplosion: 0.2
+  explosionEffect: {fileID: 0}
 --- !u!1001 &223132479675855175
 PrefabInstance:
   m_ObjectHideFlags: 0

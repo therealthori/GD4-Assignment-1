@@ -66,15 +66,11 @@ public class TankMovement : MonoBehaviour
             // Convert stick direction to world direction
             Vector3 moveDir = new Vector3(input.x, 0f, input.y).normalized;
 
-            // Calculate target rotation
-            Quaternion targetRotation = Quaternion.LookRotation(moveDir);
+             // Calculate target rotation
+             Quaternion targetRotation = Quaternion.LookRotation(moveDir);
 
-            // Smoothly rotate tank
-            tank.rotation = Quaternion.RotateTowards(
-                tank.rotation,
-                targetRotation,
-                turnSpeedAtMax * Time.deltaTime
-            );
+             // Smoothly rotate tank
+             tank.rotation = Quaternion.RotateTowards(tank.rotation, targetRotation, turnSpeedAtMax * Time.deltaTime);
 
             // Accelerate forward
             currentSpeed += acceleration * Time.deltaTime;

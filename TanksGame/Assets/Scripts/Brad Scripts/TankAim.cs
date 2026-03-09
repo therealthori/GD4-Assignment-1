@@ -8,7 +8,7 @@ public class TankAim : MonoBehaviour
     //private Gamepad p1Gamepad;
     //private Gamepad p2Gamepad;
 
-    public GameObject warningText;
+    //public GameObject warningText;
 
     [Header("Actions")]
     [SerializeField] private InputActionReference p1Aim;
@@ -21,12 +21,21 @@ public class TankAim : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float rotateSpeed = 120f; // degrees per second
 
+    [Header("AIM trajectory line")]
+    [SerializeField] private LineRenderer p1Line;
+    [SerializeField] private LineRenderer p2Line;
+
+    [SerializeField] private float trajectoryDistance = 15f;
+    [SerializeField] private int maxBounces = 1;
+
+    [SerializeField] float scrollSpeed = 2f;
+
     private void OnEnable()
     {
         p1Aim.action.Enable();
         p2Aim.action.Enable();
 
-        InputSystem.onDeviceChange += OnDeviceChange;
+        //InputSystem.onDeviceChange += OnDeviceChange;
     }
 
     private void OnDisable()
@@ -34,25 +43,7 @@ public class TankAim : MonoBehaviour
         p1Aim.action.Disable();
         p2Aim.action.Disable();
 
-        InputSystem.onDeviceChange -= OnDeviceChange;
-    }
-
-    void OnDeviceChange(InputDevice device, InputDeviceChange change)
-    {
-        if(device is Gamepad)
-        {
-            if (change == InputDeviceChange.Disconnected)
-            {
-                warningText.SetActive(true);
-                Debug.Log("CONTROLLER DISCONNECTED!!!!");
-            }
-
-            if (change == InputDeviceChange.Reconnected)
-            {
-                warningText.SetActive(false);
-                Debug.Log("CONTROLLER DISCONNECTED!!!!");
-            }
-        }
+        //InputSystem.onDeviceChange -= OnDeviceChange;
     }
 
     private void Start()
@@ -77,19 +68,69 @@ public class TankAim : MonoBehaviour
         Vector2 m2 = gamepad2 != null ? gamepad2.rightStick.ReadValue()
             : p2Aim.action.ReadValue<Vector2>();
 
-        HandleTank(p1Gun, m1);
-        HandleTank(p2Gun, m2);
+        HandleAim(p1Gun, m1);
+        HandleAim(p2Gun, m2);
+
+        DrawTrajectory(p1Gun, p1Line);
+        DrawTrajectory(p2Gun, p2Line);
+
+        float offset = Time.time * scrollSpeed;
+
+        p1Line.material.mainTextureOffset = new Vector2(offset, 0);
+        p2Line.material.mainTextureOffset = new Vector2(offset, 0);
     }
 
-    private void HandleTank(Transform gun, Vector2 input)
+    private void HandleAim(Transform gun, Vector2 input)
     {
         if (gun == null) return;
 
         // X input rotates the tank body, Y input moves forward/back
         //float rotate = input.x + input.y * rotateSpeed * Time.deltaTime;
-        float rotate = input.x * rotateSpeed * Time.deltaTime;
+        //float rotate = input.x * rotateSpeed * Time.deltaTime;
 
 
-        gun.Rotate(0, rotate, 0f);
+        //gun.Rotate(0, rotate, 0f);
+
+        //prevent jitter when stick is near center
+        if (input.sqrMagnitude < 0.01f) return;
+
+        //convert stick direction to angle
+        float angle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
+
+        //snap rotation
+        gun.rotation = Quaternion.Slerp(gun.rotation, Quaternion.Euler(0f, angle, 0f), rotateSpeed * Time.deltaTime);
+    }
+
+    void DrawTrajectory(Transform gun, LineRenderer line)
+    {
+        if (gun == null || line == null) return;
+
+        Vector3 position = gun.position;
+        Vector3 direction = gun.forward;
+
+        line.positionCount = maxBounces + 2;
+        line.SetPosition(0, position);
+
+        int index = 1;
+
+        for(int i = 0; i <= maxBounces; i++)
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(position, direction, out hit, trajectoryDistance))
+            {
+                line.SetPosition(index, hit.point);
+
+                direction = Vector3.Reflect(direction, hit.normal);
+                position = hit.point;
+
+                index++;
+            }
+            else
+            {
+                line.SetPosition(index, position + direction * trajectoryDistance);
+                break;
+            }
+        }
     }
 }
