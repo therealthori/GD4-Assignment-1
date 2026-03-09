@@ -101,17 +101,17 @@ public class NewAim : MonoBehaviour
             }
         }
 
-        // Fallback to keyboard/mouse based on player index
-        if (playerIndex == 0 && Mouse.current != null)
-        {
-            // Player 1: Mouse aiming
-            return GetMouseAimInput();
-        }
-        else if (playerIndex == 1 && Keyboard.current != null)
-        {
-            // Player 2: Arrow keys or IJKL for aiming
-            return GetKeyboardAimInput();
-        }
+        //// Fallback to keyboard/mouse based on player index
+        //if (playerIndex == 0 && Mouse.current != null)
+        //{
+        //    // Player 1: Mouse aiming
+        //    return GetMouseAimInput();
+        //}
+        //else if (playerIndex == 1 && Keyboard.current != null)
+        //{
+        //    // Player 2: Arrow keys or IJKL for aiming
+        //    return GetKeyboardAimInput();
+        //}
 
         // Final fallback to input action reference
         if (aimAction != null)
@@ -122,48 +122,48 @@ public class NewAim : MonoBehaviour
         return Vector2.zero;
     }
 
-    private Vector2 GetMouseAimInput()
-    {
-        if (gun == null || Camera.main == null) return Vector2.zero;
+    //private Vector2 GetMouseAimInput()
+    //{
+    //    if (gun == null || Camera.main == null) return Vector2.zero;
 
-        // Convert mouse position to world direction
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        Plane groundPlane = new Plane(Vector3.up, gun.position);
+    //    // Convert mouse position to world direction
+    //    Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+    //    Plane groundPlane = new Plane(Vector3.up, gun.position);
         
-        if (groundPlane.Raycast(ray, out float distance))
-        {
-            Vector3 targetPoint = ray.GetPoint(distance);
-            Vector3 directionToTarget = (targetPoint - gun.position).normalized;
+    //    if (groundPlane.Raycast(ray, out float distance))
+    //    {
+    //        Vector3 targetPoint = ray.GetPoint(distance);
+    //        Vector3 directionToTarget = (targetPoint - gun.position).normalized;
             
-            // Convert world direction to input vector
-            return new Vector2(directionToTarget.x, directionToTarget.z);
-        }
+    //        // Convert world direction to input vector
+    //        return new Vector2(directionToTarget.x, directionToTarget.z);
+    //    }
 
-        return Vector2.zero;
-    }
+    //    return Vector2.zero;
+    //}
 
-    private Vector2 GetKeyboardAimInput()
-    {
-        float horizontal = 0;
-        float vertical = 0;
+    //private Vector2 GetKeyboardAimInput()
+    //{
+    //    float horizontal = 0;
+    //    float vertical = 0;
 
-        if (Keyboard.current != null)
-        {
-            // Arrow keys for aiming
-            if (Keyboard.current.rightArrowKey.isPressed) horizontal += 1;
-            if (Keyboard.current.leftArrowKey.isPressed) horizontal -= 1;
-            if (Keyboard.current.upArrowKey.isPressed) vertical += 1;
-            if (Keyboard.current.downArrowKey.isPressed) vertical -= 1;
+    //    if (Keyboard.current != null)
+    //    {
+    //        // Arrow keys for aiming
+    //        if (Keyboard.current.rightArrowKey.isPressed) horizontal += 1;
+    //        if (Keyboard.current.leftArrowKey.isPressed) horizontal -= 1;
+    //        if (Keyboard.current.upArrowKey.isPressed) vertical += 1;
+    //        if (Keyboard.current.downArrowKey.isPressed) vertical -= 1;
 
-            // Alternative: IJKL keys
-            if (Keyboard.current.lKey.isPressed) horizontal += 1;
-            if (Keyboard.current.jKey.isPressed) horizontal -= 1;
-            if (Keyboard.current.iKey.isPressed) vertical += 1;
-            if (Keyboard.current.kKey.isPressed) vertical -= 1;
-        }
+    //        // Alternative: IJKL keys
+    //        if (Keyboard.current.lKey.isPressed) horizontal += 1;
+    //        if (Keyboard.current.jKey.isPressed) horizontal -= 1;
+    //        if (Keyboard.current.iKey.isPressed) vertical += 1;
+    //        if (Keyboard.current.kKey.isPressed) vertical -= 1;
+    //    }
 
-        return new Vector2(horizontal, vertical).normalized;
-    }
+    //    return new Vector2(horizontal, vertical).normalized;
+    //}
 
     private void HandleAim(Vector2 input)
     {

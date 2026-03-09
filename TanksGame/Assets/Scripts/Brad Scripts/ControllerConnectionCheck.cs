@@ -4,7 +4,10 @@ using UnityEngine.UI;
 
 public class ControllerConnectionCheck : MonoBehaviour
 {
-    public GameObject warningText;
+    public GameObject disconnectedImage;
+    public MenuManager menuMan;
+
+    [SerializeField] private bool isPaused = false;
 
     private void OnEnable()
     {
@@ -22,16 +25,28 @@ public class ControllerConnectionCheck : MonoBehaviour
         {
             if (change == InputDeviceChange.Disconnected)
             {
-                warningText.SetActive(true);
+                disconnectedImage.SetActive(true);
+                TogglePause();
                 Debug.Log("CONTROLLER DISCONNECTED!!!!");
             }
 
             if (change == InputDeviceChange.Reconnected)
             {
-                warningText.SetActive(false);
-                Debug.Log("CONTROLLER DISCONNECTED!!!!");
+                disconnectedImage.SetActive(false);
+                TogglePause();
+                Debug.Log("CONTROLLER RECONNECTED!!!!");
             }
         }
+    }
+
+    public void TogglePause()
+    {
+        isPaused = !isPaused;
+
+        //disconnectedImage.SetActive(isPaused);
+        //p2PauseMenu.SetActive(isPaused);
+
+        Time.timeScale = isPaused ? 0f : 1f;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

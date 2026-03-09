@@ -171,7 +171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4321631448119752151
 Transform:
   m_ObjectHideFlags: 0
@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: 1275117418814777280}
   - component: {fileID: 3225307969599511038}
   - component: {fileID: 829179622150865134}
+  - component: {fileID: 8012524126143817562}
   m_Layer: 0
   m_Name: character Controller
   m_TagString: Player
@@ -679,6 +680,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8012524126143817562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6379066968378184360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4937bb4e57df0084f8ba7b07ead19dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrajectoryLine
+  aimLine: {fileID: 1488437847287099327}
+  gun: {fileID: 6874902191426452872}
+  aimDistance: 25
+  startOffset: 0.5
+  nonTargetColor: {r: 1, g: 1, b: 1, a: 1}
+  enemyColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &7181767869905571562
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,7 +707,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6874902191426452872}
-  - component: {fileID: 8629592149373529145}
   m_Layer: 0
   m_Name: gun
   m_TagString: Untagged
@@ -713,24 +731,6 @@ Transform:
   - {fileID: 4610883835945793263}
   m_Father: {fileID: 3389294915983284283}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8629592149373529145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7181767869905571562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4937bb4e57df0084f8ba7b07ead19dd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TrajectoryLine
-  aimLine: {fileID: 1488437847287099327}
-  gun: {fileID: 6874902191426452872}
-  aimDistance: 25
-  startOffset: 1.5
-  nonTargetColor: {r: 1, g: 1, b: 1, a: 1}
-  enemyColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &7211019163387997655
 GameObject:
   m_ObjectHideFlags: 0
