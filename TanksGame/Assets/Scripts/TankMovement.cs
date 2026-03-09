@@ -7,7 +7,7 @@ public class TankMovement : MonoBehaviour
     [SerializeField] private float acceleration = 8f;
     [SerializeField] private float deceleration = 10f;
     [SerializeField] private float maxForwardSpeed = 8f;
-    //[SerializeField] private float maxReverseSpeed = 4f;
+    [SerializeField] private float maxReverseSpeed = 4f;
     [SerializeField] private float turnSpeedAtMax = 120f;
 
     private float p1CurrentSpeed = 0f;
