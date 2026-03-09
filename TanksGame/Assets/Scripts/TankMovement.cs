@@ -26,23 +26,6 @@ public class TankMovement : MonoBehaviour
     //[SerializeField] private float rotateSpeed = 120f; // degrees per second
     //[SerializeField] private float accel = 0.5f;
     //[SerializeField] private float currentSpeed = 0;
-    
-    private void Start()
-    {
-        Health[] players = FindObjectsOfType<Health>();
-    
-        foreach (Health player in players)
-        {
-            if (player.playerNumber == 1)
-                p1 = player.transform;
-    
-            if (player.playerNumber == 2)
-                p2 = player.transform;
-        }
-        
-        Debug.Log("Player1: " + p1);
-        Debug.Log("Player2: " + p2);
-    }
 
     private void OnEnable()
     {
