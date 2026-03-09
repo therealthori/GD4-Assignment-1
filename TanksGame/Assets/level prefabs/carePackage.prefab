@@ -95,6 +95,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c469d6bedbd54a44b5bee6b615a7eb3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2938117297599319317}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c469d6bedbd54a44b5bee6b615a7eb3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3510337997909315803}
   m_SourcePrefab: {fileID: 100100000, guid: 0c469d6bedbd54a44b5bee6b615a7eb3, type: 3}
 --- !u!1 &1966718921787249499 stripped
 GameObject:
@@ -122,3 +125,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.4976969, y: 2.1358752, z: 2.497399}
   m_Center: {x: -0.74884856, y: 1.7195337, z: 0.15416813}
+--- !u!114 &-3510337997909315803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966718921787249499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b5e40211116434da5310e6446230b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Randomizer
+  powerUps:
+  - {fileID: 5525778162400139480, guid: 51536f131736198469e99188171105e0, type: 3}
+  - {fileID: 1693399415067330481, guid: 6572866482f9a0b4f8cb93e9ced1b32e, type: 3}
+  respawnTime: 8

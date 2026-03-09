@@ -272,6 +272,9 @@ MonoBehaviour:
   deceleration: 4
   maxForwardSpeed: 4
   turnSpeedAtMax: 200
+  boostMultiplier: 2
+  boostDuration: 3
+  boostParticles: {fileID: 0}
   moveAction: {fileID: 6467167166275652041, guid: b9277160c87458540bd2dcab2d8c1817, type: 3}
   playerIndex: 1
 --- !u!65 &608385796167245816
@@ -338,10 +341,6 @@ MonoBehaviour:
   playerIndex: 1
   gun: {fileID: 5186272945484577092}
   rotateSpeed: 120
-  line: {fileID: 0}
-  trajectoryDistance: 15
-  maxBounces: 1
-  scrollSpeed: 2
 --- !u!114 &4063859570900816239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,7 +380,7 @@ MonoBehaviour:
   deathEffect: {fileID: 353388701213343594, guid: 1fe26ed72345259438bb567bb9574787, type: 3}
   deathSound: {fileID: 8300000, guid: 8fa50397bd0f52d449ea4d3c23d870f4, type: 3}
   audioSource: {fileID: 2720288991548031890}
-  shieldVisual: {fileID: 0}
+  shieldVisual: {fileID: 2495731101727496666, guid: 3a257f9a894c90b4db316d3f0bfe355d, type: 3}
 --- !u!82 &2720288991548031890
 AudioSource:
   m_ObjectHideFlags: 0
