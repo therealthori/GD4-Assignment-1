@@ -9,6 +9,14 @@ public class NewMovement : MonoBehaviour
     [SerializeField] private float turnSpeedAtMax = 200f;
 
     private float currentSpeed = 0f;
+    
+    [Header("Boost Settings")]
+    [SerializeField] private float boostMultiplier = 2f;
+    [SerializeField] private float boostDuration = 3f;
+    private bool isBoosted = false;
+    
+    [Header("Boost Effects")]
+    [SerializeField] private ParticleSystem boostParticles;
 
     [Header("Input")]
     [SerializeField] private InputActionReference moveAction;
@@ -82,5 +90,37 @@ public class NewMovement : MonoBehaviour
 
         currentSpeed = Mathf.Clamp(currentSpeed, 0, maxForwardSpeed);
         transform.position += transform.forward * currentSpeed * Time.deltaTime;
+    }
+    
+    public void ActivateBoost()
+    {
+        if (!isBoosted)
+        {
+            StartCoroutine(BoostRoutine());
+        }
+    }
+    
+    private System.Collections.IEnumerator BoostRoutine()
+    {
+        isBoosted = true;
+    
+        float originalMaxSpeed = maxForwardSpeed;
+        float originalAcceleration = acceleration;
+    
+        maxForwardSpeed *= boostMultiplier;
+        acceleration *= boostMultiplier;
+    
+        if (boostParticles != null)
+            boostParticles.Play();
+    
+        yield return new WaitForSeconds(boostDuration);
+    
+        maxForwardSpeed = originalMaxSpeed;
+        acceleration = originalAcceleration;
+    
+        if (boostParticles != null)
+            boostParticles.Stop();
+    
+        isBoosted = false;
     }
 }

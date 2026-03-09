@@ -2,16 +2,28 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
-    public float shieldDuration = 4f;
+    [Header("Shield Settings")]
+        public float shieldDuration = 5f;
     
         private void OnTriggerEnter(Collider other)
         {
-            Health health = other.GetComponent<Health>();
+            Health playerHealth = other.GetComponent<Health>();
     
-            if (health != null)
+            if (playerHealth != null)
             {
-                health.ActivateShield(shieldDuration);
+                playerHealth.ActivateShield(shieldDuration);
+    
                 Destroy(gameObject);
             }
         }
+        
+        void NotifySpawner()
+                    {
+                        Randomizer spawner = GetComponentInParent<Randomizer>();
+                
+                        if (spawner != null)
+                        {
+                            spawner.PowerUpCollected();
+                        }
+                    }
 }
