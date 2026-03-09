@@ -118,6 +118,15 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Value"",
+                    ""id"": ""707fa44e-920c-4d43-a6f6-578d3d32b44d"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -252,6 +261,17 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b962579a-08d6-43a4-85dc-2e71d3b44a2e"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -282,6 +302,15 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""c10b79f5-c951-4089-89f7-9c8b1d02d7a6"",
                     ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause2"",
+                    ""type"": ""Value"",
+                    ""id"": ""552e3f4b-b7bb-433d-b57d-ce0992987e28"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -419,6 +448,17 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
                     ""action"": ""Aim2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""04d071d8-b1e2-4262-b917-82f74771bd08"",
+                    ""path"": ""<Gamepad>1/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -458,11 +498,13 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
         m_FirstPlayer_Movement = m_FirstPlayer.FindAction("Movement", throwIfNotFound: true);
         m_FirstPlayer_Shoot = m_FirstPlayer.FindAction("Shoot", throwIfNotFound: true);
         m_FirstPlayer_Aim = m_FirstPlayer.FindAction("Aim", throwIfNotFound: true);
+        m_FirstPlayer_Pause = m_FirstPlayer.FindAction("Pause", throwIfNotFound: true);
         // SecondPlayer
         m_SecondPlayer = asset.FindActionMap("SecondPlayer", throwIfNotFound: true);
         m_SecondPlayer_Movement2 = m_SecondPlayer.FindAction("Movement2", throwIfNotFound: true);
         m_SecondPlayer_Shoot2 = m_SecondPlayer.FindAction("Shoot2", throwIfNotFound: true);
         m_SecondPlayer_Aim2 = m_SecondPlayer.FindAction("Aim2", throwIfNotFound: true);
+        m_SecondPlayer_Pause2 = m_SecondPlayer.FindAction("Pause2", throwIfNotFound: true);
         // FirstPlayerUI
         m_FirstPlayerUI = asset.FindActionMap("FirstPlayerUI", throwIfNotFound: true);
         m_FirstPlayerUI_Newaction = m_FirstPlayerUI.FindAction("New action", throwIfNotFound: true);
@@ -551,6 +593,7 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_FirstPlayer_Movement;
     private readonly InputAction m_FirstPlayer_Shoot;
     private readonly InputAction m_FirstPlayer_Aim;
+    private readonly InputAction m_FirstPlayer_Pause;
     /// <summary>
     /// Provides access to input actions defined in input action map "FirstPlayer".
     /// </summary>
@@ -574,6 +617,10 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "FirstPlayer/Aim".
         /// </summary>
         public InputAction @Aim => m_Wrapper.m_FirstPlayer_Aim;
+        /// <summary>
+        /// Provides access to the underlying input action "FirstPlayer/Pause".
+        /// </summary>
+        public InputAction @Pause => m_Wrapper.m_FirstPlayer_Pause;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -609,6 +656,9 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         /// <summary>
@@ -629,6 +679,9 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         /// <summary>
@@ -669,6 +722,7 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_SecondPlayer_Movement2;
     private readonly InputAction m_SecondPlayer_Shoot2;
     private readonly InputAction m_SecondPlayer_Aim2;
+    private readonly InputAction m_SecondPlayer_Pause2;
     /// <summary>
     /// Provides access to input actions defined in input action map "SecondPlayer".
     /// </summary>
@@ -692,6 +746,10 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "SecondPlayer/Aim2".
         /// </summary>
         public InputAction @Aim2 => m_Wrapper.m_SecondPlayer_Aim2;
+        /// <summary>
+        /// Provides access to the underlying input action "SecondPlayer/Pause2".
+        /// </summary>
+        public InputAction @Pause2 => m_Wrapper.m_SecondPlayer_Pause2;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -727,6 +785,9 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
             @Aim2.started += instance.OnAim2;
             @Aim2.performed += instance.OnAim2;
             @Aim2.canceled += instance.OnAim2;
+            @Pause2.started += instance.OnPause2;
+            @Pause2.performed += instance.OnPause2;
+            @Pause2.canceled += instance.OnPause2;
         }
 
         /// <summary>
@@ -747,6 +808,9 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
             @Aim2.started -= instance.OnAim2;
             @Aim2.performed -= instance.OnAim2;
             @Aim2.canceled -= instance.OnAim2;
+            @Pause2.started -= instance.OnPause2;
+            @Pause2.performed -= instance.OnPause2;
+            @Pause2.canceled -= instance.OnPause2;
         }
 
         /// <summary>
@@ -904,6 +968,13 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAim(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPause(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "SecondPlayer" which allows adding and removing callbacks.
@@ -933,6 +1004,13 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAim2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Pause2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPause2(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "FirstPlayerUI" which allows adding and removing callbacks.

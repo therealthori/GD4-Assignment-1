@@ -6,6 +6,8 @@ public class TrajectoryLine : MonoBehaviour
     [SerializeField] private Transform gun;
     [SerializeField] private float aimDistance = 25f;
 
+    [SerializeField] private float startOffset = 0.5f;
+
     [SerializeField] private Color nonTargetColor = Color.white;
     [SerializeField] private Color enemyColor = Color.red;
 
@@ -18,14 +20,14 @@ public class TrajectoryLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateAimLine();
     }
 
     private void UpdateAimLine()
     {
         if (gun == null || aimLine == null) return;
 
-        Vector3 start = gun.position;
+        Vector3 start = gun.position + gun.forward * startOffset;
         Vector3 direction = gun.forward;
 
         Ray ray = new Ray(start, direction);
@@ -36,20 +38,28 @@ public class TrajectoryLine : MonoBehaviour
             aimLine.SetPosition(0, start);
             aimLine.SetPosition(1, hit.point);
 
-            if (hit.collider.CompareTag("Tank"))
+            if (hit.collider.CompareTag("Player"))
             {
-                aimLine.startColor = enemyColor;
-                aimLine.endColor = enemyColor;
+                Debug.Log("AIM LINE HIT PLAYER TURN RED PLEASE!!!!");
+                Debug.Log(hit.collider.name);
+                aimLine.material.color = enemyColor;
+                //aimLine.endColor = enemyColor;
             }
             else
             {
-                aimLine.startColor = nonTargetColor;
-                aimLine.endColor = nonTargetColor;
+                aimLine.material.color = nonTargetColor;
+                //aimLine.endColor = nonTargetColor;
             }
         }
         else
         {
+            Vector3 end = start + direction * aimDistance;
 
+            aimLine.SetPosition(0, start);
+            aimLine.SetPosition(1, end);
+
+            aimLine.material.color = nonTargetColor;
+            //aimLine.endColor = nonTargetColor;
         }
     }
 }

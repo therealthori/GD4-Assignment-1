@@ -32,10 +32,10 @@ public class ScoreManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             InitializeScores();
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        //else
+        //{
+        //    //Destroy(gameObject);
+        //}
     }
     
     void InitializeScores()
