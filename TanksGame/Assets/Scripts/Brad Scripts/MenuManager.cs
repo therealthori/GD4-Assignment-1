@@ -52,7 +52,7 @@ public class MenuManager : MonoBehaviour
         //HandlePause(p1PauseMenu, m2, isPaused);
     }
 
-    private void TogglePause()
+    public void TogglePause()
     {
         isPaused = !isPaused;
 
