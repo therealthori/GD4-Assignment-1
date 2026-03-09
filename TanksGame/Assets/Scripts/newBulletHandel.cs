@@ -3,180 +3,201 @@ using UnityEngine.InputSystem;
 
 public class newBulletHandel : MonoBehaviour
 {
-    [Header("Shooting Settings")]
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private float bulletSpeed = 20f;
-    [SerializeField] private float fireRate = 0.5f;
-
-    [Header("Fire Point")]
-    [SerializeField] private Transform firePoint;
-
-    [Header("Input")]
-    [SerializeField] private InputActionReference shootAction;
-    [SerializeField] private int playerIndex = 0; // 0 for Player 1, 1 for Player 2
-
-    [Header("Magazine Settings")]
-    [SerializeField] private int magazineSize = 5;
-    [SerializeField] private float reloadTime = 2f;
-
-    private int ammo;
-    private bool reloading = false;
-    private float reloadTimer = 0f;
-    private float cooldown = 0f;
-
-    [Header("Recoil")]
-    [SerializeField] private float recoilForce = 3f;
-    [SerializeField] private Rigidbody tankRb;
-
-    [Header("Effects")]
-    [SerializeField] private ParticleSystem bulletShotEffect;
-
-    // Store assigned gamepad
-    private Gamepad assignedGamepad;
-
-    private void OnEnable()
-    {
-        if (shootAction != null)
-            shootAction.action.Enable();
-    }
-
-    private void OnDisable()
-    {
-        if (shootAction != null)
-            shootAction.action.Disable();
-    }
-
-    private void Start()
-    {
-        ammo = magazineSize;
-        AssignGamepad();
-    }
-
-    private void AssignGamepad()
-    {
-        // Assign the appropriate gamepad based on player index
-        if (Gamepad.all.Count > playerIndex)
+     [Header("Shooting Settings")]
+        [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private float bulletSpeed = 20f;
+        [SerializeField] private float fireRate = 0.5f;
+    
+        [Header("Fire Point")]
+        [SerializeField] private Transform firePoint;
+    
+        [Header("Input")]
+        [SerializeField] private int playerIndex = 0; // 0 for Player 1, 1 for Player 2
+        // REMOVED: [SerializeField] private InputActionReference shootAction; - Don't use shared action references!
+    
+        [Header("Magazine Settings")]
+        [SerializeField] private int magazineSize = 5;
+        [SerializeField] private float reloadTime = 2f;
+    
+        private int ammo;
+        private bool reloading = false;
+        private float reloadTimer = 0f;
+        private float cooldown = 0f;
+    
+        [Header("Recoil")]
+        [SerializeField] private float recoilForce = 3f;
+        [SerializeField] private Rigidbody tankRb;
+    
+        [Header("Effects")]
+        [SerializeField] private ParticleSystem bulletShotEffect;
+    
+        // Store assigned gamepad
+        private Gamepad assignedGamepad;
+    
+        private void Start()
         {
-            assignedGamepad = Gamepad.all[playerIndex];
-            Debug.Log($"Player {playerIndex + 1} shooter assigned to {assignedGamepad.name}");
-        }
-        else
-        {
-            assignedGamepad = null;
-        }
-    }
-
-    void Update()
-    {
-        // Reassign gamepad if device count changes
-        if (assignedGamepad == null && Gamepad.all.Count > playerIndex)
-        {
+            ammo = magazineSize;
             AssignGamepad();
         }
-
-        float input = GetShootInput();
-
-        UpdateReload();
-
-        if (cooldown > 0f)
-            cooldown -= Time.deltaTime;
-
-        HandleShooting(input);
-    }
-
-    private float GetShootInput()
-    {
-        // Try gamepad first (right trigger)
-        if (assignedGamepad != null)
+    
+        private void AssignGamepad()
         {
-            float gamepadInput = assignedGamepad.rightTrigger.ReadValue();
-            if (gamepadInput > 0.1f)
+            // Clear previous assignment
+            assignedGamepad = null;
+            
+            // Assign the appropriate gamepad based on player index
+            if (Gamepad.all.Count > playerIndex)
             {
-                return gamepadInput;
+                assignedGamepad = Gamepad.all[playerIndex];
+                Debug.Log($"Player {playerIndex + 1} shooter assigned to {assignedGamepad.name}");
+            }
+            else
+            {
+                Debug.Log($"Player {playerIndex + 1} shooter: No gamepad assigned, using keyboard");
             }
         }
-
-        // Fallback to keyboard based on player index
-        if (playerIndex == 0 && Keyboard.current != null)
+    
+        void Update()
         {
-            // Player 1: Space or Left Control
-            if (Keyboard.current.spaceKey.isPressed || Keyboard.current.leftCtrlKey.isPressed)
-                return 1f;
-        }
-        else if (playerIndex == 1 && Keyboard.current != null)
-        {
-            // Player 2: Enter or Right Control
-            if (Keyboard.current.enterKey.isPressed || Keyboard.current.rightCtrlKey.isPressed)
-                return 1f;
-        }
-
-        // Final fallback to input action reference
-        if (shootAction != null)
-        {
-            return shootAction.action.ReadValue<float>();
-        }
-
-        return 0f;
-    }
-
-    private void HandleShooting(float input)
-    {
-        if (firePoint == null || reloading) return;
-
-        if (input > 0.1f && cooldown <= 0f && ammo > 0)
-        {
-            cooldown = fireRate;
-            ammo--;
-
-            if (bulletShotEffect != null)
-                bulletShotEffect.Play();
-
-            GameObject bulletInstance = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-
-            Rigidbody bulletRb = bulletInstance.GetComponent<Rigidbody>();
-
-            if (bulletRb != null)
+            // Reassign gamepad if device count changes
+            if (assignedGamepad == null && Gamepad.all.Count > playerIndex)
             {
-                bulletRb.AddForce(firePoint.forward * bulletSpeed, ForceMode.VelocityChange);
+                AssignGamepad();
             }
-
-            // recoil
-            if (tankRb != null)
+            // Clear gamepad if it was unplugged
+            else if (assignedGamepad != null && Gamepad.all.Count <= playerIndex)
             {
-                tankRb.AddForce(-firePoint.forward * recoilForce, ForceMode.Impulse);
+                assignedGamepad = null;
             }
-
-            Destroy(bulletInstance, 3f);
-
-            if (ammo <= 0)
+    
+            // Get input DIRECTLY from devices, NOT through shared action references
+            bool shouldShoot = GetShootInput();
+    
+            UpdateReload();
+    
+            if (cooldown > 0f)
+                cooldown -= Time.deltaTime;
+    
+            if (shouldShoot)
             {
-                reloading = true;
-                reloadTimer = reloadTime;
+                HandleShooting();
             }
         }
-    }
-
-    private void UpdateReload()
-    {
-        if (!reloading) return;
-
-        reloadTimer -= Time.deltaTime;
-
-        if (reloadTimer <= 0f)
+    
+        private bool GetShootInput()
         {
-            reloading = false;
-            ammo = magazineSize;
+            // Player 1: Use keyboard (WASD + Space/Left Control)
+            if (playerIndex == 0)
+            {
+                // Check gamepad first if available
+                if (assignedGamepad != null)
+                {
+                    if (assignedGamepad.rightTrigger.ReadValue() > 0.1f ||
+                        assignedGamepad.aButton.isPressed ||
+                        assignedGamepad.xButton.isPressed)
+                    {
+                        return true;
+                    }
+                }
+                
+                // Keyboard fallback for Player 1
+                if (Keyboard.current != null)
+                {
+                    // Space or Left Control for Player 1
+                    if (Keyboard.current.spaceKey.isPressed || 
+                        Keyboard.current.leftCtrlKey.isPressed)
+                    {
+                        return true;
+                    }
+                }
+            }
+            // Player 2: Use keyboard (Arrow Keys + Enter/Right Control)
+            else if (playerIndex == 1)
+            {
+                // Check gamepad first if available
+                if (assignedGamepad != null)
+                {
+                    if (assignedGamepad.rightTrigger.ReadValue() > 0.1f ||
+                        assignedGamepad.aButton.isPressed ||
+                        assignedGamepad.xButton.isPressed)
+                    {
+                        return true;
+                    }
+                }
+                
+                // Keyboard fallback for Player 2
+                if (Keyboard.current != null)
+                {
+                    // Enter or Right Control for Player 2
+                    if (Keyboard.current.enterKey.isPressed || 
+                        Keyboard.current.rightCtrlKey.isPressed)
+                    {
+                        return true;
+                    }
+                }
+            }
+    
+            return false;
         }
-    }
-
-    public float GetReloadPercent()
-    {
-        if (!reloading) return 1f;
-        return 1f - (reloadTimer / reloadTime);
-    }
-
-    public int GetAmmo()
-    {
-        return ammo;
-    }
+    
+        private void HandleShooting()
+        {
+            if (firePoint == null || reloading) return;
+    
+            if (cooldown <= 0f && ammo > 0)
+            {
+                cooldown = fireRate;
+                ammo--;
+    
+                if (bulletShotEffect != null)
+                    bulletShotEffect.Play();
+    
+                GameObject bulletInstance = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+    
+                Rigidbody bulletRb = bulletInstance.GetComponent<Rigidbody>();
+    
+                if (bulletRb != null)
+                {
+                    bulletRb.AddForce(firePoint.forward * bulletSpeed, ForceMode.VelocityChange);
+                }
+    
+                // recoil
+                if (tankRb != null)
+                {
+                    tankRb.AddForce(-firePoint.forward * recoilForce, ForceMode.Impulse);
+                }
+    
+                Destroy(bulletInstance, 3f);
+    
+                if (ammo <= 0)
+                {
+                    reloading = true;
+                    reloadTimer = reloadTime;
+                }
+            }
+        }
+    
+        private void UpdateReload()
+        {
+            if (!reloading) return;
+    
+            reloadTimer -= Time.deltaTime;
+    
+            if (reloadTimer <= 0f)
+            {
+                reloading = false;
+                ammo = magazineSize;
+            }
+        }
+    
+        public float GetReloadPercent()
+        {
+            if (!reloading) return 1f;
+            return 1f - (reloadTimer / reloadTime);
+        }
+    
+        public int GetAmmo()
+        {
+            return ammo;
+        }
 }
