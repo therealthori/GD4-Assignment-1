@@ -32,6 +32,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Pause",
+                    "type": "Value",
+                    "id": "707fa44e-920c-4d43-a6f6-578d3d32b44d",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -166,6 +175,17 @@
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b962579a-08d6-43a4-85dc-2e71d3b44a2e",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -196,6 +216,15 @@
                     "type": "Value",
                     "id": "c10b79f5-c951-4089-89f7-9c8b1d02d7a6",
                     "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Pause2",
+                    "type": "Value",
+                    "id": "552e3f4b-b7bb-433d-b57d-ce0992987e28",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -331,6 +360,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Aim2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "04d071d8-b1e2-4262-b917-82f74771bd08",
+                    "path": "<Gamepad>1/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

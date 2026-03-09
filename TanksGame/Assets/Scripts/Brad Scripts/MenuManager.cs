@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -7,8 +8,12 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private InputActionReference p1Pause;
     [SerializeField] private InputActionReference p2Pause;
 
+    [SerializeField] private bool isPaused = false;
+
     [SerializeField] private GameObject p1PauseMenu;
-    [SerializeField] private GameObject p2PauseMenu;
+    //[SerializeField] private GameObject p2PauseMenu;
+
+    [SerializeField] private GameObject firstSelectedButton;
 
     private void OnEnable()
     {
@@ -21,6 +26,7 @@ public class MenuManager : MonoBehaviour
         p1Pause.action.Disable();
         p2Pause.action.Disable();
     }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,15 +40,41 @@ public class MenuManager : MonoBehaviour
         var gamepad2 = Gamepad.all.Count > 1 ? Gamepad.all[1] : null;
 
         // Fall back to action references if no gamepad found
-        bool m1 = p1Pause.action.ReadValue<bool>();
-        bool m2 = p2Pause.action.ReadValue<bool>();
+        bool p1Pressed = gamepad1 != null ? gamepad1.startButton.wasPressedThisFrame : p1Pause.action.WasPressedThisFrame();
+        bool p2Pressed = gamepad2 != null ? gamepad2.startButton.wasPressedThisFrame : p2Pause.action.WasPressedThisFrame();
 
-        //HandlePause(p1PauseMenu, m1, ref isPaused);
-        //HandlePause(p1PauseMenu, m2, ref isPaused);
+        if (p1Pressed || p2Pressed)
+        {
+            TogglePause();
+        }
+
+        //HandlePause(p1PauseMenu, m1, isPaused);
+        //HandlePause(p1PauseMenu, m2, isPaused);
     }
 
-    private void HandlePause(GameObject pauseMenu, bool input, bool isPaused)
+    private void TogglePause()
     {
+        isPaused = !isPaused;
 
+        p1PauseMenu.SetActive(isPaused);
+        //p2PauseMenu.SetActive(isPaused);
+
+        Time.timeScale = isPaused ? 0f : 1f;
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("Quit the GAME BOMBOCLAAT");
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
+
+    public void TutorialLevel()
+    {
+        SceneManager.LoadScene("Tutorial");
     }
 }
