@@ -21,14 +21,14 @@ public class TankAim : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float rotateSpeed = 120f; // degrees per second
 
-    [Header("AIM trajectory line")]
-    [SerializeField] private LineRenderer p1Line;
-    [SerializeField] private LineRenderer p2Line;
+    //[Header("AIM trajectory line")]
+    //[SerializeField] private LineRenderer p1Line;
+    //[SerializeField] private LineRenderer p2Line;
 
-    [SerializeField] private float trajectoryDistance = 15f;
-    [SerializeField] private int maxBounces = 1;
+    //[SerializeField] private float trajectoryDistance = 15f;
+    //[SerializeField] private int maxBounces = 1;
 
-    [SerializeField] float scrollSpeed = 2f;
+    //[SerializeField] float scrollSpeed = 2f;
 
     private void OnEnable()
     {
@@ -71,13 +71,13 @@ public class TankAim : MonoBehaviour
         HandleAim(p1Gun, m1);
         HandleAim(p2Gun, m2);
 
-        DrawTrajectory(p1Gun, p1Line);
-        DrawTrajectory(p2Gun, p2Line);
+        //DrawTrajectory(p1Gun, p1Line);
+        //DrawTrajectory(p2Gun, p2Line);
 
-        float offset = Time.time * scrollSpeed;
+        //float offset = Time.time * scrollSpeed;
 
-        p1Line.material.mainTextureOffset = new Vector2(offset, 0);
-        p2Line.material.mainTextureOffset = new Vector2(offset, 0);
+        //p1Line.material.mainTextureOffset = new Vector2(offset, 0);
+        //p2Line.material.mainTextureOffset = new Vector2(offset, 0);
     }
 
     private void HandleAim(Transform gun, Vector2 input)
@@ -99,38 +99,5 @@ public class TankAim : MonoBehaviour
 
         //snap rotation
         gun.rotation = Quaternion.Slerp(gun.rotation, Quaternion.Euler(0f, angle, 0f), rotateSpeed * Time.deltaTime);
-    }
-
-    void DrawTrajectory(Transform gun, LineRenderer line)
-    {
-        if (gun == null || line == null) return;
-
-        Vector3 position = gun.position;
-        Vector3 direction = gun.forward;
-
-        line.positionCount = maxBounces + 2;
-        line.SetPosition(0, position);
-
-        int index = 1;
-
-        for(int i = 0; i <= maxBounces; i++)
-        {
-            RaycastHit hit;
-
-            if (Physics.Raycast(position, direction, out hit, trajectoryDistance))
-            {
-                line.SetPosition(index, hit.point);
-
-                direction = Vector3.Reflect(direction, hit.normal);
-                position = hit.point;
-
-                index++;
-            }
-            else
-            {
-                line.SetPosition(index, position + direction * trajectoryDistance);
-                break;
-            }
-        }
     }
 }
