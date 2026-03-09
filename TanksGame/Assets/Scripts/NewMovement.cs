@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class NewMovement : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is create
     [Header("Car Settings")]
     [SerializeField] private float acceleration = 4f;
     [SerializeField] private float deceleration = 4f;
@@ -13,21 +12,44 @@ public class NewMovement : MonoBehaviour
 
     [Header("Input")]
     [SerializeField] private InputActionReference moveAction;
-
-    private void OnEnable()
-    {
-        moveAction.action.Enable();
-    }
-
-    private void OnDisable()
-    {
-        moveAction.action.Disable();
-    }
+    [SerializeField] private int playerIndex = 0; // Set to 0 for Player 1, 1 for Player 2 in prefab variants
 
     private void Update()
     {
-        Vector2 input = moveAction.action.ReadValue<Vector2>();
-
+        Vector2 input = Vector2.zero;
+        
+        // Try to get input from the appropriate gamepad
+        if (Gamepad.all.Count > playerIndex)
+        {
+            input = Gamepad.all[playerIndex].leftStick.ReadValue();
+        }
+        // Fallback to keyboard for player 1 (WASD)
+        else if (playerIndex == 0 && Keyboard.current != null)
+        {
+            float horizontal = 0;
+            float vertical = 0;
+            
+            if (Keyboard.current.wKey.isPressed) vertical += 1;
+            if (Keyboard.current.sKey.isPressed) vertical -= 1;
+            if (Keyboard.current.aKey.isPressed) horizontal -= 1;
+            if (Keyboard.current.dKey.isPressed) horizontal += 1;
+            
+            input = new Vector2(horizontal, vertical);
+        }
+        // Fallback to arrow keys for player 2
+        else if (playerIndex == 1 && Keyboard.current != null)
+        {
+            float horizontal = 0;
+            float vertical = 0;
+            
+            if (Keyboard.current.upArrowKey.isPressed) vertical += 1;
+            if (Keyboard.current.downArrowKey.isPressed) vertical -= 1;
+            if (Keyboard.current.leftArrowKey.isPressed) horizontal -= 1;
+            if (Keyboard.current.rightArrowKey.isPressed) horizontal += 1;
+            
+            input = new Vector2(horizontal, vertical);
+        }
+        
         HandleTank(input);
     }
 
@@ -59,7 +81,6 @@ public class NewMovement : MonoBehaviour
         }
 
         currentSpeed = Mathf.Clamp(currentSpeed, 0, maxForwardSpeed);
-
         transform.position += transform.forward * currentSpeed * Time.deltaTime;
     }
 }
