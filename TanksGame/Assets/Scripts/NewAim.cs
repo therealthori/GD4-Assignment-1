@@ -13,12 +13,21 @@ public class NewAim : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float rotateSpeed = 120f;
 
-    [Header("Trajectory")]
-    [SerializeField] private LineRenderer line;
-    [SerializeField] private float trajectoryDistance = 15f;
-    [SerializeField] private int maxBounces = 1;
+    //[Header("Trajectory")]
+    //[SerializeField] private LineRenderer line;
+    //[SerializeField] private float trajectoryDistance = 15f;
+    //[SerializeField] private int maxBounces = 1;
 
-    [SerializeField] private float scrollSpeed = 2f;
+    //[SerializeField] private float scrollSpeed = 2f;
+
+    //[SerializeField] private LineRenderer aimLine;
+    ////[SerializeField] private Transform gun;
+    //[SerializeField] private float aimDistance = 25f;
+
+    //[SerializeField] private float startOffset = 0.5f;
+
+    //[SerializeField] private Color nonTargetColor = Color.white;
+    //[SerializeField] private Color enemyColor = Color.red;
 
     // Optional: Store the assigned gamepad for this player
     private Gamepad assignedGamepad;
@@ -58,6 +67,8 @@ public class NewAim : MonoBehaviour
 
     private void Update()
     {
+        //UpdateAimLine();
+
         // Reassign gamepad if device count changes (player plugged in later)
         if (assignedGamepad == null && Gamepad.all.Count > playerIndex)
         {
@@ -66,14 +77,14 @@ public class NewAim : MonoBehaviour
 
         Vector2 input = GetAimInput();
         HandleAim(input);
-        DrawTrajectory();
+        //DrawTrajectory();
 
-        // Scroll texture for line renderer
-        if (line != null && line.material != null)
-        {
-            float offset = Time.time * scrollSpeed;
-            line.material.mainTextureOffset = new Vector2(offset, 0);
-        }
+        //// Scroll texture for line renderer
+        //if (line != null && line.material != null)
+        //{
+        //    float offset = Time.time * scrollSpeed;
+        //    line.material.mainTextureOffset = new Vector2(offset, 0);
+        //}
     }
 
     private Vector2 GetAimInput()
@@ -173,43 +184,50 @@ public class NewAim : MonoBehaviour
         );
     }
 
-    void DrawTrajectory()
-    {
-        if (gun == null || line == null) return;
-
-        Vector3 position = gun.position;
-        Vector3 direction = gun.forward;
-
-        line.positionCount = maxBounces + 2;
-        line.SetPosition(0, position);
-
-        int index = 1;
-
-        for (int i = 0; i <= maxBounces; i++)
-        {
-            RaycastHit hit;
-
-            if (Physics.Raycast(position, direction, out hit, trajectoryDistance))
-            {
-                line.SetPosition(index, hit.point);
-
-                direction = Vector3.Reflect(direction, hit.normal);
-                position = hit.point;
-
-                index++;
-            }
-            else
-            {
-                line.SetPosition(index, position + direction * trajectoryDistance);
-                break;
-            }
-        }
-    }
-
     // Optional: Call this if you want to reassign gamepads (e.g., when player joins late)
     public void SetPlayerIndex(int newPlayerIndex)
     {
         playerIndex = newPlayerIndex;
         AssignGamepad();
     }
+
+    //private void UpdateAimLine()
+    //{
+    //    if (gun == null || aimLine == null) return;
+
+    //    Vector3 start = gun.position + gun.forward * startOffset;
+    //    Vector3 direction = gun.forward;
+
+    //    Ray ray = new Ray(start, direction);
+    //    RaycastHit hit;
+
+    //    if (Physics.Raycast(ray, out hit, aimDistance))
+    //    {
+    //        aimLine.SetPosition(0, start);
+    //        aimLine.SetPosition(1, hit.point);
+
+    //        if (hit.collider.CompareTag("Player"))
+    //        {
+    //            Debug.Log("AIM LINE HIT PLAYER TURN RED PLEASE!!!!");
+    //            Debug.Log(hit.collider.name);
+    //            aimLine.material.color = enemyColor;
+    //            //aimLine.endColor = enemyColor;
+    //        }
+    //        else
+    //        {
+    //            aimLine.material.color = nonTargetColor;
+    //            //aimLine.endColor = nonTargetColor;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        Vector3 end = start + direction * aimDistance;
+
+    //        aimLine.SetPosition(0, start);
+    //        aimLine.SetPosition(1, end);
+
+    //        aimLine.material.color = nonTargetColor;
+    //        //aimLine.endColor = nonTargetColor;
+    //    }
+    //}
 }
