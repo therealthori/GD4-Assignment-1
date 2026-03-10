@@ -7718,6 +7718,16 @@ MonoBehaviour:
   roundEndDelay: 3
   player1: {fileID: 439165101}
   player2: {fileID: 1329604744}
+  firstLevelIndex: 1
+  lastLevelIndex: 5
+  levelOrder:
+  - StartScene
+  - Djibs'Scene
+  - Level2
+  - level3
+  - LEVEL4
+  - level5
+  - Level6
 --- !u!1 &1304122723270457770
 GameObject:
   m_ObjectHideFlags: 0

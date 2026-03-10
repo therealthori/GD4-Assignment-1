@@ -1228,6 +1228,18 @@ MonoBehaviour:
     playerName: 
   roundsToWin: 3
   roundEndDelay: 3
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  firstLevelIndex: 1
+  lastLevelIndex: 5
+  levelOrder:
+  - StartScene
+  - Djibs'Scene
+  - Level2
+  - level3
+  - LEVEL4
+  - level5
+  - Level6
 --- !u!114 &325005415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4771,6 +4783,10 @@ PrefabInstance:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 1275117418814777280, guid: 8d7374d9f35bed84493e5f9cdb178ae9, type: 3}
+      propertyPath: ammoCount
+      value: 
+      objectReference: {fileID: 2088275060}
     - target: {fileID: 3864481402070131639, guid: 8d7374d9f35bed84493e5f9cdb178ae9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.410121
@@ -5010,6 +5026,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4063859570900816239, guid: 3e792af4837f8e844b80480b010e9090, type: 3}
+      propertyPath: ammoCount
+      value: 
+      objectReference: {fileID: 2088275059}
     - target: {fileID: 4237569270138496945, guid: 3e792af4837f8e844b80480b010e9090, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.885477
@@ -10811,7 +10831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
@@ -10830,6 +10850,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2088275056}
     - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 325005414}
+    - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -10846,11 +10870,23 @@ PrefabInstance:
       value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: ResetScores
+      objectReference: {fileID: 0}
+    - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: ScoreManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 9101618223873324030, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
@@ -10953,6 +10989,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6002182088586472739, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
   m_PrefabInstance: {fileID: 2088275055}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2088275059 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2180789191218463865, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+  m_PrefabInstance: {fileID: 2088275055}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &2088275060 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3744774762105128660, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+  m_PrefabInstance: {fileID: 2088275055}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!4 &2129524426 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 191985339852916748, guid: 1fe26ed72345259438bb567bb9574787, type: 3}

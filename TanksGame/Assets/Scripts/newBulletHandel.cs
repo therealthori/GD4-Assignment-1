@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class newBulletHandel : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class newBulletHandel : MonoBehaviour
     // Store assigned gamepad
     private Gamepad assignedGamepad;
 
+    public TextMeshProUGUI ammoCount;
+
     private void Start()
     {
         ammo = magazineSize;
@@ -61,6 +64,8 @@ public class newBulletHandel : MonoBehaviour
 
     void Update()
     {
+        ammoCount.text = ammo.ToString();
+
         // Reassign gamepad if device count changes
         if (assignedGamepad == null && Gamepad.all.Count > playerIndex)
         {
