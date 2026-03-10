@@ -113,17 +113,29 @@ public class ScoreManager : MonoBehaviour
     }
 
     // NEW — loads the dedicated win screen scene
-    IEnumerator LoadWinScene()
-    {
-        yield return new WaitForSeconds(roundEndDelay);
-        SceneManager.LoadScene("Level6");
-    }
+    //IEnumerator LoadWinScene()
+    //{
+    //    yield return new WaitForSeconds(roundEndDelay);
+    //    SceneManager.LoadScene("Level6");
+    //}
 
     public void ResetScores()
     {
+        foreach (var ps in playerScores)
+            ps.score = 0;
+
         GameWinner = 0;
-        foreach (var ps in playerScores) ps.score = 0;
         OnScoresUpdated?.Invoke();
+    }
+
+    public void FullGameReset()
+    {
+        ResetScores();
+
+        // Destroy the persistent manager so the game fully resets
+        Destroy(gameObject);
+
+        SceneManager.LoadScene("StartScene");
     }
 
     public int GetPlayerScore(int playerNumber)

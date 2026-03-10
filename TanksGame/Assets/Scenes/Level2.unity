@@ -14786,6 +14786,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: carePackage
       objectReference: {fileID: 0}
+    - target: {fileID: 1966718921787249499, guid: 72a461c28dda63c4b9434cb450ade25c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

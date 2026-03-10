@@ -9,6 +9,8 @@ public class BackToMainMenu : MonoBehaviour
     void Start()
     {
         //StartCoroutine(Return());
+
+        Invoke(nameof(ResetAndGoToMenu), delay);
     }
 
     // Update is called once per frame
@@ -24,4 +26,17 @@ public class BackToMainMenu : MonoBehaviour
     //    ScoreManager.Instance.ResetScores();
     //    SceneManager.LoadScene("MainMenu");
     //}
+
+    void ResetAndGoToMenu()
+    {
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.FullGameReset();
+        }
+        else
+        {
+            // Just in case, fallback
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
 }
