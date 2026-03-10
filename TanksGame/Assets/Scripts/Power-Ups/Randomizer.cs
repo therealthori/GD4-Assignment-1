@@ -2,39 +2,44 @@ using UnityEngine;
 
 public class Randomizer : MonoBehaviour
 {
-    [Header("Power Up Prefabs")]
-        public GameObject[] powerUps;
+    {
+        [Header("Shield Settings")]
+        public float shieldDuration = 5f;
     
-        [Header("Spawn Settings")]
-        public float respawnTime = 8f;
-    
-        private GameObject currentPowerUp;
-    
-        void Start()
+        private void OnTriggerEnter(Collider other)
         {
-            SpawnPowerUp();
+            // Try to get player components
+            NewMovement movement = other.GetComponent<NewMovement>();
+            Health health = other.GetComponent<Health>();
+    
+            if (movement == null && health == null) return;
+    
+            // Randomly choose power-up
+            int randomPower = Random.Range(0, 2); // 0 = Speed, 1 = Shield
+    
+            if (randomPower == 0 && movement != null)
+            {
+                movement.ActivateBoost();
+                Debug.Log("Speed Boost Activated!");
+            }
+            else if (randomPower == 1 && health != null)
+            {
+                health.ActivateShield(shieldDuration);
+                Debug.Log("Shield Activated!");
+            }
+    
+            NotifySpawner();
+            Destroy(gameObject);
         }
     
-        void SpawnPowerUp()
+        void NotifySpawner()
         {
-            if (powerUps.Length == 0) return;
+            Randomizer spawner = GetComponentInParent<Randomizer>();
     
-            int randomIndex = Random.Range(0, powerUps.Length);
-    
-            currentPowerUp = Instantiate(
-                powerUps[randomIndex],
-                transform.position,
-                Quaternion.identity
-            );
-    
-            currentPowerUp.transform.parent = transform;
+            if (spawner != null)
+            {
+                spawner.PowerUpCollected();
+            }
         }
-    
-        public void PowerUpCollected()
-        {
-            if (currentPowerUp != null)
-                Destroy(currentPowerUp);
-    
-            Invoke(nameof(SpawnPowerUp), respawnTime);
-        }
+    }
 }

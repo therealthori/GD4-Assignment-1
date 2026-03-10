@@ -479,7 +479,7 @@ MonoBehaviour:
   turnSpeedAtMax: 200
   boostMultiplier: 2
   boostDuration: 3
-  boostParticles: {fileID: 0}
+  boostParticles: {fileID: 2688623571737932814, guid: cd6051b0832d4e74d913fbab8c36b5bf, type: 3}
   moveAction: {fileID: 7147951308470708111, guid: b9277160c87458540bd2dcab2d8c1817, type: 3}
   playerIndex: 0
 --- !u!65 &2494797797228081503
@@ -568,6 +568,7 @@ MonoBehaviour:
   recoilForce: 3
   tankRb: {fileID: 0}
   bulletShotEffect: {fileID: 0}
+  ammoCount: {fileID: 0}
 --- !u!114 &3225307969599511038
 MonoBehaviour:
   m_ObjectHideFlags: 0
