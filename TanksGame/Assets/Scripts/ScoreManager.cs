@@ -15,7 +15,6 @@ public class ScoreManager : MonoBehaviour
     }
 
     public PlayerScore[] playerScores   = new PlayerScore[2];
-    public int roundsToWin   = 3;
     public float roundEndDelay = 3f;
 
     //public NewAim aim
@@ -72,10 +71,9 @@ public class ScoreManager : MonoBehaviour
     {
         int winningPlayer = (deadPlayerNumber == 1) ? 2 : 1;
 
-        AddScore(winningPlayer);
+        AddScore(winningPlayer);          // increment winner’s score
         OnRoundWinner?.Invoke(winningPlayer);
 
-        // Always continue to next round
         StartCoroutine(LoadNextRound());
     }
 
@@ -90,14 +88,6 @@ public class ScoreManager : MonoBehaviour
                 break;
             }
         }
-    }
-
-    int CheckGameWinner()
-    {
-        foreach (var ps in playerScores)
-            if (ps.score >= roundsToWin) return ps.playerNumber;
-
-        return -1;
     }
 
     IEnumerator LoadNextRound()
@@ -118,7 +108,15 @@ public class ScoreManager : MonoBehaviour
     //    yield return new WaitForSeconds(roundEndDelay);
     //    SceneManager.LoadScene("Level6");
     //}
-
+    public void DetermineGameWinner()
+    {
+        if (playerScores[0].score > playerScores[1].score)
+            GameWinner = 1;
+        else if (playerScores[1].score > playerScores[0].score)
+            GameWinner = 2;
+        else
+            GameWinner = 0; // tie
+    }
     public void ResetScores()
     {
         foreach (var ps in playerScores)
@@ -130,12 +128,9 @@ public class ScoreManager : MonoBehaviour
 
     public void FullGameReset()
     {
-        ResetScores();
-
-        // Destroy the persistent manager so the game fully resets
-        Destroy(gameObject);
-
-        SceneManager.LoadScene("StartScene");
+            ResetScores();      // clears scores and winner
+            Destroy(gameObject); // destroy old singleton so fresh one is created
+            SceneManager.LoadScene("StartScene");
     }
 
     public int GetPlayerScore(int playerNumber)

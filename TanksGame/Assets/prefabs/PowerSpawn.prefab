@@ -13,7 +13,7 @@ GameObject:
   m_Layer: 0
   m_Name: PowerSpawn
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07b5e40211116434da5310e6446230b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Randomizer
-  speedBoostPrefab: {fileID: 5525778162400139480, guid: 51536f131736198469e99188171105e0, type: 3}
-  shieldPrefab: {fileID: 1693399415067330481, guid: 6572866482f9a0b4f8cb93e9ced1b32e, type: 3}
-  respawnDelay: 8
+  speedBoostPrefab: {fileID: 5525778162400139480, guid: cc52593b50a7e8d42a08595c9d89f599, type: 3}
+  shieldPrefab: {fileID: 1693399415067330481, guid: 51536f131736198469e99188171105e0, type: 3}
+  respawnDelay: 12

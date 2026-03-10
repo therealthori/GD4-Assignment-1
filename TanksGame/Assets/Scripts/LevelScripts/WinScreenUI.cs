@@ -16,7 +16,7 @@ public class WinScreenUI : MonoBehaviour
 
     [Header("Countdown")]
     [SerializeField] private TextMeshProUGUI countdownText;
-    [SerializeField] private float           returnDelay = 5f;
+    [SerializeField] private float returnDelay = 5f;
 
     [Header("Scene")]
     [SerializeField] private string startSceneName = "StartScene";
@@ -47,10 +47,10 @@ public class WinScreenUI : MonoBehaviour
         switch (winner)
         {
             case 1:
-                if (p1WinImage) p1WinImage.SetActive(true);
+                if (p1Score > p2Score) p1WinImage.SetActive(true);
                 break;
             case 2:
-                if (p2WinImage) p2WinImage.SetActive(true);
+                if (p1Score < p2Score) p2WinImage.SetActive(true);
                 break;
             default:
                 // Tie — show both
