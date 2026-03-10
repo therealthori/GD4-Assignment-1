@@ -63,33 +63,58 @@ public class NewMovement : MonoBehaviour
 
     private void HandleTank(Vector2 input)
     {
-        float inputMagnitude = input.magnitude;
+       float inputMagnitude = input.magnitude;
 
-        if (inputMagnitude > 0.1f)
+    if (inputMagnitude > 0.1f)
+    {
+        // Start movement sound if not already playing
+        SoundManager.Instance.StartTankMove();
+
+        // Determine movement direction
+        Vector3 moveDir = new Vector3(input.x, 0f, input.y).normalized;
+
+        // Rotate tank towards movement direction
+        Quaternion targetRotation = Quaternion.LookRotation(moveDir);
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            targetRotation,
+            turnSpeedAtMax * Time.deltaTime
+        );
+
+        // Accelerate
+        currentSpeed += acceleration * Time.deltaTime;
+        currentSpeed = Mathf.Clamp(currentSpeed, 0, maxForwardSpeed);
+
+        // Update engine pitch based on current speed
+        if (SoundManager.Instance.movementSource != null)
         {
-            Vector3 moveDir = new Vector3(input.x, 0f, input.y).normalized;
-
-            Quaternion targetRotation = Quaternion.LookRotation(moveDir);
-
-            transform.rotation = Quaternion.RotateTowards(
-                transform.rotation,
-                targetRotation,
-                turnSpeedAtMax * Time.deltaTime
-            );
-
-            currentSpeed += acceleration * Time.deltaTime;
+            SoundManager.Instance.movementSource.pitch = 0.8f + (currentSpeed / maxForwardSpeed) * 0.4f;
         }
-        else
+    }
+    else
+    {
+        // Decelerate when no input
+        if (currentSpeed > 0)
         {
-            if (currentSpeed > 0)
+            currentSpeed -= deceleration * Time.deltaTime;
+            currentSpeed = Mathf.Max(currentSpeed, 0);
+
+            // Update pitch while decelerating
+            if (SoundManager.Instance.movementSource != null && currentSpeed > 0)
             {
-                currentSpeed -= deceleration * Time.deltaTime;
-                currentSpeed = Mathf.Max(currentSpeed, 0);
+                SoundManager.Instance.movementSource.pitch = 0.8f + (currentSpeed / maxForwardSpeed) * 0.4f;
             }
         }
 
-        currentSpeed = Mathf.Clamp(currentSpeed, 0, maxForwardSpeed);
-        transform.position += transform.forward * currentSpeed * Time.deltaTime;
+        // Stop movement sound when fully stopped
+        if (currentSpeed <= 0)
+        {
+            SoundManager.Instance.StopTankMove();
+        }
+    }
+
+    // Move the tank forward
+    transform.position += transform.forward * currentSpeed * Time.deltaTime;
     }
     
     public void ActivateBoost()
