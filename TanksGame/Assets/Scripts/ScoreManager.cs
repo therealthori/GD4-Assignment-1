@@ -15,8 +15,15 @@ public class ScoreManager : MonoBehaviour
     }
 
     public PlayerScore[] playerScores   = new PlayerScore[2];
-    public int           roundsToWin   = 3;
-    public float         roundEndDelay = 3f;
+    public int roundsToWin   = 3;
+    public float roundEndDelay = 3f;
+
+    //public NewAim aim
+    //public newBulletHandel
+    //public NewMovement
+
+    public GameObject player1;
+    public GameObject player2;
 
     // Stores the winner so WinScene can read it
     public int GameWinner { get; private set; } = 0;
@@ -33,10 +40,10 @@ public class ScoreManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             InitializeScores();
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 
     void InitializeScores()
@@ -58,6 +65,8 @@ public class ScoreManager : MonoBehaviour
             GameWinner = winner; // store winner before scene change
             OnGameWinner?.Invoke(winner);
             StartCoroutine(LoadWinScene());
+            player1.SetActive(false);
+            player2.SetActive(false);
         }
         else
         {

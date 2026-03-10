@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class newBulletHandel : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class newBulletHandel : MonoBehaviour
     
         // Store assigned gamepad
         private Gamepad assignedGamepad;
+
+    public TextMeshProUGUI ammoCount;
     
         private void Start()
         {
@@ -82,6 +85,8 @@ public class newBulletHandel : MonoBehaviour
             {
                 HandleShooting();
             }
+
+            ammoCount.text=ammo.ToString();
         }
     
         private bool GetShootInput()

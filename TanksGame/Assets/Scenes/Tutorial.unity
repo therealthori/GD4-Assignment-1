@@ -1454,6 +1454,11 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1 &439165101 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6379066968378184360, guid: 8d7374d9f35bed84493e5f9cdb178ae9, type: 3}
+  m_PrefabInstance: {fileID: 2127655958}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &497658079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1462,10 +1467,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1919284483077642353, guid: 3e792af4837f8e844b80480b010e9090, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.52
-      objectReference: {fileID: 0}
     - target: {fileID: 4237569270138496945, guid: 3e792af4837f8e844b80480b010e9090, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12
@@ -2670,6 +2671,17 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &834585299 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3744774762105128660, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+  m_PrefabInstance: {fileID: 3800421092655480685}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!43 &873572554
 Mesh:
   m_ObjectHideFlags: 0
@@ -3995,6 +4007,11 @@ Mesh:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2970449917365582094, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
   m_PrefabInstance: {fileID: 3800421092655480685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1329604744 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5113103208196213827, guid: 3e792af4837f8e844b80480b010e9090, type: 3}
+  m_PrefabInstance: {fileID: 497658079}
   m_PrefabAsset: {fileID: 0}
 --- !u!43 &1336751104
 Mesh:
@@ -6437,6 +6454,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1275117418814777280, guid: 8d7374d9f35bed84493e5f9cdb178ae9, type: 3}
+      propertyPath: ammoCount
+      value: 
+      objectReference: {fileID: 834585299}
     - target: {fileID: 3864481402070131639, guid: 8d7374d9f35bed84493e5f9cdb178ae9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.18
@@ -7634,6 +7655,8 @@ MonoBehaviour:
     playerName: 
   roundsToWin: 3
   roundEndDelay: 3
+  player1: {fileID: 439165101}
+  player2: {fileID: 1329604744}
 --- !u!1 &1304122723270457770
 GameObject:
   m_ObjectHideFlags: 0
@@ -9967,10 +9990,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1266992547}
-    - target: {fileID: 6979951452523777035, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 1301464406053983821}
     - target: {fileID: 9101618223873324030, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
       propertyPath: m_Pivot.x
       value: 0

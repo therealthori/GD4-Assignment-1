@@ -363,6 +363,7 @@ MonoBehaviour:
   recoilForce: 3
   tankRb: {fileID: 0}
   bulletShotEffect: {fileID: 0}
+  ammoCount: {fileID: 0}
 --- !u!114 &4852394628812737693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,7 +693,7 @@ Transform:
   m_GameObject: {fileID: 8751206353874775814}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.26750624, y: -0.98999995, z: 2.314305}
+  m_LocalPosition: {x: -0.26750624, y: -0.98999995, z: 2.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
