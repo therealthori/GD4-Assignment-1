@@ -32,6 +32,22 @@ public class ScoreManager : MonoBehaviour
     public System.Action<int>  OnRoundWinner;
     public System.Action<int>  OnGameWinner;
 
+    public int firstLevelIndex = 1;
+    public int lastLevelIndex = 5;
+
+    public string[] levelOrder =
+{
+    "StartScene",
+    "Djibs'Scene",
+    "Level2",
+    "level3",
+    "LEVEL4",
+    "level5",
+    "Level6"
+};
+
+    private int currentLevel = 0;
+
     void Awake()
     {
         if (Instance == null)
@@ -59,19 +75,8 @@ public class ScoreManager : MonoBehaviour
         AddScore(winningPlayer);
         OnRoundWinner?.Invoke(winningPlayer);
 
-        int winner = CheckGameWinner();
-        if (winner > 0)
-        {
-            GameWinner = winner; // store winner before scene change
-            OnGameWinner?.Invoke(winner);
-            StartCoroutine(LoadWinScene());
-            player1.SetActive(false);
-            player2.SetActive(false);
-        }
-        else
-        {
-            StartCoroutine(LoadNextRound());
-        }
+        // Always continue to next round
+        StartCoroutine(LoadNextRound());
     }
 
     void AddScore(int playerNumber)
@@ -99,13 +104,12 @@ public class ScoreManager : MonoBehaviour
     {
         yield return new WaitForSeconds(roundEndDelay);
 
-        int next = SceneManager.GetActiveScene().buildIndex + 1;
+        currentLevel++;
 
-        // Skip scene 0 (MainMenu) and WinScene (last scene)
-        int lastPlayableScene = SceneManager.sceneCountInBuildSettings - 2;
-        if (next > lastPlayableScene) next = 1;
+        if (currentLevel >= levelOrder.Length)
+            currentLevel = 0;
 
-        SceneManager.LoadScene(next);
+        SceneManager.LoadScene(levelOrder[currentLevel]);
     }
 
     // NEW — loads the dedicated win screen scene

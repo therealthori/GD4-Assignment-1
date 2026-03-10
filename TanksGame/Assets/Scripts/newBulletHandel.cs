@@ -97,24 +97,22 @@ public class newBulletHandel : MonoBehaviour
                 // Check gamepad first if available
                 if (assignedGamepad != null)
                 {
-                    if (assignedGamepad.rightTrigger.ReadValue() > 0.1f ||
-                        assignedGamepad.aButton.isPressed ||
-                        assignedGamepad.xButton.isPressed)
+                    if (assignedGamepad.rightTrigger.ReadValue() > 0.1f)
                     {
                         return true;
                     }
                 }
                 
                 // Keyboard fallback for Player 1
-                if (Keyboard.current != null)
-                {
-                    // Space or Left Control for Player 1
-                    if (Keyboard.current.spaceKey.isPressed || 
-                        Keyboard.current.leftCtrlKey.isPressed)
-                    {
-                        return true;
-                    }
-                }
+                //if (Keyboard.current != null)
+                //{
+                //    // Space or Left Control for Player 1
+                //    if (Keyboard.current.spaceKey.isPressed || 
+                //        Keyboard.current.leftCtrlKey.isPressed)
+                //    {
+                //        return true;
+                //    }
+                //}
             }
             // Player 2: Use keyboard (Arrow Keys + Enter/Right Control)
             else if (playerIndex == 1)
@@ -122,24 +120,22 @@ public class newBulletHandel : MonoBehaviour
                 // Check gamepad first if available
                 if (assignedGamepad != null)
                 {
-                    if (assignedGamepad.rightTrigger.ReadValue() > 0.1f ||
-                        assignedGamepad.aButton.isPressed ||
-                        assignedGamepad.xButton.isPressed)
+                    if (assignedGamepad.rightTrigger.ReadValue() > 0.1f)
                     {
                         return true;
                     }
                 }
                 
                 // Keyboard fallback for Player 2
-                if (Keyboard.current != null)
-                {
-                    // Enter or Right Control for Player 2
-                    if (Keyboard.current.enterKey.isPressed || 
-                        Keyboard.current.rightCtrlKey.isPressed)
-                    {
-                        return true;
-                    }
-                }
+                //if (Keyboard.current != null)
+                //{
+                //    // Enter or Right Control for Player 2
+                //    if (Keyboard.current.enterKey.isPressed || 
+                //        Keyboard.current.rightCtrlKey.isPressed)
+                //    {
+                //        return true;
+                //    }
+                //}
             }
     
             return false;

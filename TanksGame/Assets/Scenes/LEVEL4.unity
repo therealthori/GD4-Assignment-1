@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 1275117418814777280, guid: 8d7374d9f35bed84493e5f9cdb178ae9, type: 3}
+      propertyPath: ammoCount
+      value: 
+      objectReference: {fileID: 1822869803}
     - target: {fileID: 2494797797228081503, guid: 8d7374d9f35bed84493e5f9cdb178ae9, type: 3}
       propertyPath: m_Size.x
       value: 2.043439
@@ -4213,7 +4217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -4236,6 +4240,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3051240831925549890}
     - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 1301464405452304349}
+    - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -4252,6 +4260,10 @@ PrefabInstance:
       value: TogglePause
       objectReference: {fileID: 0}
     - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: ResetScores
+      objectReference: {fileID: 0}
+    - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
@@ -4260,8 +4272,20 @@ PrefabInstance:
       value: MenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: ScoreManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5702711595638379796, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979951452523777035, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9101618223873324030, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
       propertyPath: m_Pivot.x
@@ -4363,6 +4387,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2970449917365582094, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
   m_PrefabInstance: {fileID: 1822869798}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1822869802 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2180789191218463865, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+  m_PrefabInstance: {fileID: 1822869798}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &1822869803 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3744774762105128660, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+  m_PrefabInstance: {fileID: 1822869798}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!43 &1947937894
 Mesh:
   m_ObjectHideFlags: 0
@@ -6044,6 +6090,18 @@ MonoBehaviour:
     playerName: 
   roundsToWin: 5
   roundEndDelay: 5
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  firstLevelIndex: 1
+  lastLevelIndex: 5
+  levelOrder:
+  - StartScene
+  - Djibs'Scene
+  - Level2
+  - level3
+  - LEVEL4
+  - level5
+  - Level6
 --- !u!1 &1305140097675186002
 GameObject:
   m_ObjectHideFlags: 0
@@ -6300,6 +6358,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4063859570900816239, guid: 3e792af4837f8e844b80480b010e9090, type: 3}
+      propertyPath: ammoCount
+      value: 
+      objectReference: {fileID: 1822869802}
     - target: {fileID: 4237569270138496945, guid: 3e792af4837f8e844b80480b010e9090, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.95

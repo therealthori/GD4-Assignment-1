@@ -1467,6 +1467,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4063859570900816239, guid: 3e792af4837f8e844b80480b010e9090, type: 3}
+      propertyPath: ammoCount
+      value: 
+      objectReference: {fileID: 3800421092655480689}
     - target: {fileID: 4237569270138496945, guid: 3e792af4837f8e844b80480b010e9090, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12
@@ -5472,7 +5476,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1644259291
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9994,6 +9998,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 1301464406053983821}
+    - target: {fileID: 6979951452523777035, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9101618223873324030, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -10079,6 +10087,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+--- !u!114 &3800421092655480689 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2180789191218463865, guid: 5baa2bc24a5aec64a8699034d6009c8c, type: 3}
+  m_PrefabInstance: {fileID: 3800421092655480685}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!4 &3841947797393118779
 Transform:
   m_ObjectHideFlags: 0

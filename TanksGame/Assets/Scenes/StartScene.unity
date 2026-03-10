@@ -1220,6 +1220,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2112317138}
+        m_TargetAssemblyTypeName: ScoreManager, Assembly-CSharp
+        m_MethodName: ResetScores
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1911887087
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,6 +1386,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2112317137}
   - component: {fileID: 2112317136}
+  - component: {fileID: 2112317138}
   m_Layer: 0
   m_Name: menu manager
   m_TagString: Untagged
@@ -1393,8 +1406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f072f2bafaee8040b72df19a6db2ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuManager
-  p1Pause: {fileID: -1262391634953987810, guid: b9277160c87458540bd2dcab2d8c1817, type: 3}
-  p2Pause: {fileID: -2855440824718107365, guid: b9277160c87458540bd2dcab2d8c1817, type: 3}
+  p1Pause: {fileID: 0}
+  p2Pause: {fileID: 0}
   isPaused: 0
   p1PauseMenu: {fileID: 1833624066}
   firstSelectedButton: {fileID: 0}
@@ -1413,6 +1426,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2112317138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112317135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ded752e249f814d8390039fe60023e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
+  playerScores:
+  - playerNumber: 0
+    score: 0
+    playerName: 
+  - playerNumber: 0
+    score: 0
+    playerName: 
+  roundsToWin: 3
+  roundEndDelay: 3
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  firstLevelIndex: 1
+  lastLevelIndex: 5
+  levelOrder:
+  - StartScene
+  - Djibs'Scene
+  - Level2
+  - level3
+  - LEVEL4
+  - level5
+  - Level6
 --- !u!1 &2138280367
 GameObject:
   m_ObjectHideFlags: 0
