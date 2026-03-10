@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BulletDamage : MonoBehaviour
 {
-      [Header("Damage")]
+     [Header("Damage")]
     public float damage = 100f;
     public string damageTag = "Player";
 
@@ -10,23 +10,11 @@ public class BulletDamage : MonoBehaviour
     public string destructibleTag = "destructible";
 
     [Header("Bounce")]
-    public int maxBounces = 1;
+    public int maxBounces = 2;
     private int bounceCount = 0;
 
     [Header("Effects")]
     public GameObject destroyEffect;
-
-    [Header("Sound")]
-    public AudioClip bounceSound;
-    public AudioClip explodeSound;
-    public AudioClip wallBreakSound;   // NEW
-
-    private AudioSource audioSource;
-
-    void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
 
     void OnCollisionEnter(Collision collision)
     {
@@ -40,6 +28,10 @@ public class BulletDamage : MonoBehaviour
             if (health != null)
             {
                 health.TakeDamage(damage);
+
+                // player hit sound
+                SoundManager.Instance.PlaySound(SoundManager.Instance.playerDeath);
+
                 Debug.Log("Bullet damaged player");
             }
         }
@@ -47,8 +39,8 @@ public class BulletDamage : MonoBehaviour
         // DESTROY DESTRUCTIBLE WALL
         if (collision.collider.CompareTag(destructibleTag))
         {
-            if (wallBreakSound != null)
-                AudioSource.PlayClipAtPoint(wallBreakSound, transform.position);
+            // play wall break sound
+            SoundManager.Instance.PlaySoundWithVolume(SoundManager.Instance.wallBreak, 0.3f);
 
             Destroy(collision.collider.gameObject);
 
@@ -63,14 +55,14 @@ public class BulletDamage : MonoBehaviour
 
         if (bounceCount <= maxBounces)
         {
-            if (audioSource != null && bounceSound != null)
-                audioSource.PlayOneShot(bounceSound);
+            // bounce sound
+            SoundManager.Instance.PlaySoundWithVolume(SoundManager.Instance.bulletbounce, 0.3f);
         }
 
         if (bounceCount > maxBounces)
         {
-            if (explodeSound != null)
-                AudioSource.PlayClipAtPoint(explodeSound, transform.position);
+            // bullet break sound
+            SoundManager.Instance.PlaySound(SoundManager.Instance.bulletbreak);
 
             if (destroyEffect != null)
                 Instantiate(destroyEffect, transform.position, Quaternion.identity);
