@@ -3,9 +3,9 @@ using UnityEngine.InputSystem;
 public class NewMovement : MonoBehaviour
 {
     [Header("Car Settings")]
-    [SerializeField] private float acceleration = 4f;
-    [SerializeField] private float deceleration = 4f;
-    [SerializeField] private float maxForwardSpeed = 4f;
+    public float acceleration = 4f;
+    public float deceleration = 4f;
+    public float maxForwardSpeed = 4f;
     [SerializeField] private float turnSpeedAtMax = 200f;
 
     private float currentSpeed = 0f;
