@@ -568,7 +568,6 @@ MonoBehaviour:
   recoilForce: 3
   tankRb: {fileID: 0}
   bulletShotEffect: {fileID: 0}
-  ammoCount: {fileID: 0}
 --- !u!114 &3225307969599511038
 MonoBehaviour:
   m_ObjectHideFlags: 0

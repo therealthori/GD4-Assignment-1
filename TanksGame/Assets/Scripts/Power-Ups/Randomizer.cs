@@ -2,44 +2,42 @@ using UnityEngine;
 
 public class Randomizer : MonoBehaviour
 {
+    [Header("PowerUp Prefabs")]
+    [SerializeField] private GameObject speedBoostPrefab;
+    [SerializeField] private GameObject shieldPrefab;
+
+    [Header("Spawn Settings")]
+    [SerializeField] private float respawnDelay = 8f;
+
+    private GameObject currentPowerUp;
+
+    void Start()
     {
-        [Header("Shield Settings")]
-        public float shieldDuration = 5f;
-    
-        private void OnTriggerEnter(Collider other)
-        {
-            // Try to get player components
-            NewMovement movement = other.GetComponent<NewMovement>();
-            Health health = other.GetComponent<Health>();
-    
-            if (movement == null && health == null) return;
-    
-            // Randomly choose power-up
-            int randomPower = Random.Range(0, 2); // 0 = Speed, 1 = Shield
-    
-            if (randomPower == 0 && movement != null)
-            {
-                movement.ActivateBoost();
-                Debug.Log("Speed Boost Activated!");
-            }
-            else if (randomPower == 1 && health != null)
-            {
-                health.ActivateShield(shieldDuration);
-                Debug.Log("Shield Activated!");
-            }
-    
-            NotifySpawner();
-            Destroy(gameObject);
-        }
-    
-        void NotifySpawner()
-        {
-            Randomizer spawner = GetComponentInParent<Randomizer>();
-    
-            if (spawner != null)
-            {
-                spawner.PowerUpCollected();
-            }
-        }
+        SpawnRandomPowerUp();
+    }
+
+    void SpawnRandomPowerUp()
+    {
+        int random = Random.Range(0, 2);
+
+        GameObject prefabToSpawn = null;
+
+        if (random == 0)
+            prefabToSpawn = speedBoostPrefab;
+        else
+            prefabToSpawn = shieldPrefab;
+
+        currentPowerUp = Instantiate(prefabToSpawn, transform.position, Quaternion.identity);
+
+        // Make spawned pickup a child of the spawner
+        currentPowerUp.transform.parent = transform;
+    }
+
+    public void PowerUpCollected()
+    {
+        if (currentPowerUp != null)
+            Destroy(currentPowerUp);
+
+        Invoke(nameof(SpawnRandomPowerUp), respawnDelay);
     }
 }
